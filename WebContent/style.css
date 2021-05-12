@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#header{
+	background-color: #D5C4BC;
+	height:150px;
+	width:100%;
+}
+
+#title{
+	margin-left:5%;
+	margin-top:10px;
+	position:absolute;
+	height:20%;
+}
+
+#titleBt{
+	margin-left:50%;
+	margin-top:65px;
+	float:left;
+	position:relative;
+}
+
+#loginLogo{
+	height:60px;
+	width:50px;
+	float:right;
+	position:relative;
+	margin-right:4%;
+	margin-top:45px;
+}
+#loginLogo2{
+	height:60px;
+	width:45px;
+	float:right;
+	position:relative;
+	margin-right:4%;
+	margin-top:46px;
+}
+
+#body{
+	background-color:#ffffff;
+}

@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+#Left{
+	background-color: #D5C4BC;
+/* 	margin-top:160px; */
+	height:450px;
+	width:180px;
+/* 	overflow:hidden; */
+	float:left;
+	margin-left:20px;
+	margin-top:20px;
+}
+
+#tag{
+	height:35px;
+/* 	width:250px; */
+	margin-top:55px;
+	margin-left:13px;
+}

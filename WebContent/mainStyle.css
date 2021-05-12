@@ -1,0 +1,33 @@
+@charset "UTF-8";
+
+#main{
+	overflow:hidden;
+	
+/* 	background-color:#D5C4BC; */
+}
+
+#bookTable{
+/* 	margin-top:20px; */
+	height:450px;
+	width:1080px;
+	margin-top:20px;
+	margin-left:250px;
+	background-color:#D5C4BC;
+	
+	overflow-x: hidden;
+    overflow-y: auto;
+/* 	overflow:hidden; */
+/* 	padding:15px; */
+/* 	position:relative; */
+/* 	float:left; */
+}
+#AddBook{
+	height:450px;
+	width:1080px;
+	margin-top:20px;
+	margin-left:250px;
+	background-color:#D5C4BC;
+	
+	overflow-x: hidden;
+    overflow-y: auto;
+}
