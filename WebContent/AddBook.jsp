@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030" import="helper.*,java.net.*,java.sql.*"%>
+    pageEncoding="GB18030" import="helper.*,java.net.*,java.sql.*,java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,30 +27,31 @@
 						//连接数据库
 						// 加载JDBC-ODBC桥驱动驱动程序
 						//String Driver="sun.jdbc.odbc.JdbcOdbcDriver";
-						Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+// 						Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 						//连接数据库URL
 						//String URL ="jdbc:odbc:Driver=Microsoft Access Driver (*.mdb);DBQ=d:\\LJQ\\SHOP.mdb";
-						String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
-						Connection conn=DriverManager.getConnection( URL,"sa", "1064534251");
-						Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+// 						String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
+// 						Connection conn=DriverManager.getConnection( URL,"sa", "1064534251");
+// 						Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 						String sql="select TypeName from BookType";
-						ResultSet rs=stmt.executeQuery(sql);
+						List<Map<String, Object>> rs=helperClass.SelectSQL(sql);
 						
 						//获取下拉列表框数据
-						if(!rs.next()){//如果查询不到数据
+						if(null==rs){//如果查询不到数据
 							out.println("数据错误！");
 						}
 						else{//读取数据显示在下拉列表框
-							rs.beforeFirst();
-							while(rs.next()){
-								String TypeName=rs.getString("TypeName");
+// 							rs.beforeFirst();
+// 							while(rs.next()){
+							for(Map<String, Object> item:rs){
+								String TypeName=""+item.get("TypeName");
 								%>
 									<option value="<%=TypeName%>"><%=TypeName%></option>
 								<%
 							}
-							rs.close();
-							stmt.close();
-							conn.close();
+// 							rs.close();
+// 							stmt.close();
+// 							conn.close();
 						}
 					%>
 				</select><br><br>
