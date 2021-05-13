@@ -8,6 +8,8 @@
 	<link type="text/css" rel="stylesheet" href="mainStyle.css"/> 
 </head>
 <body>
+	
+ 	
 	<%@ include file="header.jsp"%>
 	
 	<div id="main">
@@ -21,7 +23,7 @@
 				图书ISBN：<input type="text" name="BookISBN"><br><br>
 				图书作者：<input type="text" name="BookWriter">&nbsp;&nbsp;
 				出版社：<input type="text" name="BookPublisher"><br><br>
-				图书简介：<input type="text" name="BookIntro">&nbsp;&nbsp;
+				图书简介：<textarea name="BookIntro"></textarea>&nbsp;&nbsp;
 				图书类别：<select name="BookType">
 					<%
 						//连接数据库
@@ -58,10 +60,13 @@
 				进货价格：<input type="text" name="BookCost">&nbsp;&nbsp;
 				出售价格：<input type="text" name="BookSell"><br><br>
 				进货日期：<input type="text" name="BookInDay"><!-- 要做格式判断 -->&nbsp;&nbsp;
-				商品图片：<!-- 获取文件 -->
+				商品图片：<input type="file" name="file">
+				
+				<!-- 获取文件 -->
 				<!-- 				库存数量写一个函数自动修改添加 -->
 				<br><br>
-				<input type="submit" value="保存">&nbsp;&nbsp;
+				输入数目：<input type="text" name="number">&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" value="保存">&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="reset" value="清空">
 			</form>
 		</div>

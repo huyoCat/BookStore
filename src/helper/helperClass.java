@@ -1,5 +1,6 @@
 package helper;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class helperClass {
 		return result;
 	}
 	
-	//连接数据库 查询操作
+	//连接数据库 查询操作 添加书籍用
 	public static List<Map<String, Object>> SelectSQL(String sql) {
 		// 加载JDBC-ODBC桥驱动驱动程序
 		//String Driver="sun.jdbc.odbc.JdbcOdbcDriver";
@@ -74,7 +75,7 @@ public class helperClass {
 			while (rs.next()) { 
 			Map<String, Object> map = new TreeMap<String, Object>(); 
 			for (int index = 1; index <= rsm.getColumnCount(); index++) { 
-			map.put(rsm.getColumnName(index), rs.getObject(index)); 
+				map.put(rsm.getColumnName(index), rs.getObject(index)); 
 			} 
 			result.add(map); 
 			}
@@ -107,6 +108,7 @@ public class helperClass {
 
 		return result;
 	}
+	
 	
 	//数据库 增、删、改
 	public static boolean SQL_ZSG(String Bsql) {
@@ -175,4 +177,71 @@ public class helperClass {
             return false;
         }
     }
+
+	//结果集转化为book类用
+	public static List<Book> reBook(List<Map<String, Object>> rs){
+		List<Book> BookList=new ArrayList<>();
+		Book book=new Book();
+		if(null==rs){//如果查询不到数据
+			System.out.println("数据错误！");
+		}
+		else {
+			for(Map<String, Object> item:rs){
+				book.setBookID(Integer.parseInt(""+item.get("BookID")));
+				book.setBookName(""+item.get("BookName"));
+				book.setBookISBN(""+item.get("BookISBN"));
+				book.setBookWriter(""+item.get("BookWriter"));
+				book.setBookIntro(""+item.get("BookIntro"));
+				book.setBookPublisher(""+item.get("BookPublisher"));
+				book.setBookType(""+item.get("BookType"));
+				book.setBookPic(""+item.get("BookPic"));
+				book.setBookCost(Float.parseFloat(""+item.get("BookCost")));
+				book.setBookSell(Float.parseFloat(""+item.get("BookSell")));
+				book.setOrderID(""+item.get("OrderID"));
+				book.setBookInDay(""+item.get("BookInDay"));
+				book.setBookOutDay(""+item.get("BookOutDay"));
+				book.setBookCount(Integer.parseInt(""+item.get("BookCount")));
+				BookList.add(book);
+				}
+		}
+		return BookList;
+	}
+	
+	//用不到的
+	public static List<Object> handler(ResultSet rs, Class<?> clazz) {
+        List<Object> list = new ArrayList<>();
+        Object obj = null;
+        try {
+            while (rs.next()) {
+                // 创建一个clazz对象实例并将其赋给要返回的那个返回值。
+                obj = clazz.newInstance();
+                // 获取结果集的数据源
+                ResultSetMetaData rsmeta = rs.getMetaData();
+ 
+                // 获取结果集中的字段数
+                int count = rsmeta.getColumnCount();
+ 
+                // 循环取出个字段的名字以及他们的值并将其作为值赋给对应的实体对象的属性
+                for (int i = 0; i < count; i++) {
+                    // 获取字段名
+                    String name = rsmeta.getColumnName(i + 1);
+                    // 利用反射将结果集中的字段名与实体对象中的属性名相对应，由于
+                    // 对象的属性都是私有的所以要想访问必须加上getDeclaredField(name)和
+                    Field f = obj.getClass().getDeclaredField(name);
+                    f.setAccessible(true);
+                    // 将结果集中的值赋给相应的对象实体的属性
+                    f.set(obj, rs.getObject(name));
+                }
+                list.add(obj);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+//	public static Book reBook(Map<String, Object> rs) {
+//		Book book=null;
+//		book.BookID=""+rs.get("BookID");
+//		return book;
+//	}
 }

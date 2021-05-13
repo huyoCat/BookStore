@@ -8,6 +8,7 @@
 	<link type="text/css" rel="stylesheet" href="mainStyle.css"/> 
 </head>
 <body>
+
 	<%@ include file="header.jsp"%>
 	
 	<div id="main">
@@ -17,6 +18,8 @@
 		<div id="AddBook">
 			<%
 				//获取数据
+				
+				String number1=request.getParameter("number");
 				String BookName=request.getParameter("BookName");
 // 				out.println(helperClass.zhuanma(BookName));
 				String BookISBN=request.getParameter("BookISBN");
@@ -36,17 +39,23 @@
 // 				out.println(BookInDay);
 				//获取下拉列表框，存在乱码，中文要做转码
 				String BookType=request.getParameter("BookType");
+				
+				String PicPath="picture/"+request.getParameter("file");
+// 				String PicPath=request.getServletPath("file");//这个是获取本jsp文件的相对路径
+// 				out.println(helperClass.zhuanma(PicPath));
 // 				out.println(helperClass.zhuanma(BookType));
 				//验证取值
 				//判断价钱是否是数字
 				double BookCost=0;
 				double BookSell=0;
+				int number=0;
 				try{
 					BookCost=Double.parseDouble(Cost);
 					BookSell=Double.parseDouble(Sell);
+					number=Integer.parseInt(number1);
 				}
 				catch(Exception e){
-					out.println("请确认商品价格填写正确！");
+					out.println("请确认商品价格或书籍数目填写正确！");
 					%>
 					<a href="javascript:history.back(-1)">返回重填</a>
 					<% 
@@ -56,6 +65,7 @@
 					out.println("请确认进货日期填写正确！");
 					%>
 					<a href="javascript:history.back(-1)">返回重填</a>
+					
 					<% 
 					return;
 				}
@@ -71,50 +81,30 @@
 					return;
 				}
 				
-				//连接数据库
-				// 加载JDBC-ODBC桥驱动驱动程序
-				//String Driver="sun.jdbc.odbc.JdbcOdbcDriver";
-// 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				//连接数据库URL
-				//String URL ="jdbc:odbc:Driver=Microsoft Access Driver (*.mdb);DBQ=d:\\LJQ\\SHOP.mdb";
-// 				String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
-// 				Connection conn=DriverManager.getConnection( URL,"sa", "1064534251");
-// 				Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-				
-				
 				//查询有没有一样的ISBN，再存入   逻辑不对，可以插入，可以加一个一共多少本循环插入
-				String sql="select BookISBN from BookInfo";
-				List<Map<String, Object>> rs=helperClass.SelectSQL(sql);
-				if(null==rs){//如果查询不到数据
-					out.println("数据错误！");
-				}
-				else{
-					for(Map<String, Object> item:rs){
-						String ISBN=""+item.get("BookISBN");
-						if(BookISBN==ISBN){
-							out.println("书籍ISBN已存在！");
-							%>
-							<a href="javascript:history.back(-1)">返回重填</a>
-							<% 
-							return;
-						}
-					}
-				}
 				
 				//存入数据
 				
-				String Addsql="insert into BookInfo (BookName,BookISBN,BookWriter,BookPublisher,BookIntro,BookCost,BookSell,BookInDay,BookType) "+
-					"values('"+BookName+"','"+BookISBN+"','"+BookWriter+"','"+BookPublisher+"','"+BookIntro+"',"+BookCost+","+BookSell+",'"+BookInDay+"','"+BookType+"')";
+				String Addsql="insert into BookInfo (BookName,BookISBN,BookWriter,BookPublisher,BookIntro,BookCost,BookSell,BookInDay,BookType,BookPic) "+
+					"values('"+BookName+"','"+BookISBN+"','"+BookWriter+"','"+BookPublisher+"','"+BookIntro+"',"+BookCost+","+BookSell+",'"+BookInDay+"','"+BookType+"','"+PicPath+"')";
 // 				ResultSet rInser=stmt.executeQuery(Addsql);
-				boolean flag=helperClass.SQL_ZSG(Addsql);
-				if(flag){
+				int count=0;//记录次数
+				boolean flag=true;
+				for(int i=0;i<number;i++){
+					flag=helperClass.SQL_ZSG(Addsql);
+					count++;
+					if(!flag){
+						break;
+					}
+				}
+				if(flag&&count==number){
 					out.println("书籍添加成功！");
 					%>
 					<a href="AddBook.jsp">继续添加</a>
 					<% 
 				}
 				else{
-					out.println("书籍添加失败！");
+					out.println("书籍添加失败！添加了"+count+"本");
 					%>
 					<a href="javascript:history.back(-1)">重新添加</a>
 					<% 
