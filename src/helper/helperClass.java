@@ -181,12 +181,12 @@ public class helperClass {
 	//结果集转化为book类用
 	public static List<Book> reBook(List<Map<String, Object>> rs){
 		List<Book> BookList=new ArrayList<>();
-		Book book=new Book();
 		if(null==rs){//如果查询不到数据
 			System.out.println("数据错误！");
 		}
 		else {
 			for(Map<String, Object> item:rs){
+				Book book=new Book();
 				book.setBookID(Integer.parseInt(""+item.get("BookID")));
 				book.setBookName(""+item.get("BookName"));
 				book.setBookISBN(""+item.get("BookISBN"));
@@ -202,9 +202,18 @@ public class helperClass {
 				book.setBookOutDay(""+item.get("BookOutDay"));
 				book.setBookCount(Integer.parseInt(""+item.get("BookCount")));
 				BookList.add(book);
-				}
+			}
 		}
 		return BookList;
+	}
+
+	//用户浏览商品的各种操作
+//	public static void Star_or_Buy()
+	
+	
+	//测试
+	public static void test() {
+		System.out.print("test");
 	}
 	
 	//用不到的
