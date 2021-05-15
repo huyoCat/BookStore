@@ -35,17 +35,17 @@
 // 						String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
 // 						Connection conn=DriverManager.getConnection( URL,"sa", "1064534251");
 // 						Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-						String sql="select TypeName from BookType";
-						List<Map<String, Object>> rs=helperClass.SelectSQL(sql);
+						String sqlGetType="select TypeName from BookType";
+						List<Map<String, Object>> rsGetType=helperClass.SelectSQL(sqlGetType);
 						
 						//获取下拉列表框数据
-						if(null==rs){//如果查询不到数据
+						if(rsGetType.size()==0){//如果查询不到数据
 							out.println("数据错误！");
 						}
 						else{//读取数据显示在下拉列表框
 // 							rs.beforeFirst();
 // 							while(rs.next()){
-							for(Map<String, Object> item:rs){
+							for(Map<String, Object> item:rsGetType){
 								String TypeName=""+item.get("TypeName");
 								%>
 									<option value="<%=TypeName%>"><%=TypeName%></option>

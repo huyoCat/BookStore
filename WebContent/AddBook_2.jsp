@@ -98,6 +98,19 @@
 					}
 				}
 				if(flag&&count==number){
+// 					这里根据ISBN计算一共有多少本，然后最后修改一下库存数量
+					String sqlCount="select BookISBN from BookInfo where BookISBN='"+BookISBN+"'";
+					List<Map<String, Object>> rsAmount=helperClass.SelectSQL(sqlCount);
+					int BookAmount=rsAmount.size();
+					//更新库存数据
+					String updateSql="update BookInfo set BookCount="+BookAmount+" where BookISBN='"+BookISBN+"'";
+					boolean flagUpdate=helperClass.SQL_ZSG(updateSql);
+					if(flagUpdate){
+						out.println("库存数量修改成功！");
+					}
+					else{
+						out.println("库存数量修改失败！");
+					}
 					out.println("书籍添加成功！");
 					%>
 					<a href="AddBook.jsp">继续添加</a>

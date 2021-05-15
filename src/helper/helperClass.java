@@ -9,9 +9,6 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//import com.sun.rowset.CachedRowSetImpl;
-
-//import javax.sql.rowset.CachedRowSet;
 
 public class helperClass {
 	//转码函数
@@ -207,50 +204,14 @@ public class helperClass {
 		return BookList;
 	}
 
-	//用户浏览商品的各种操作
-//	public static void Star_or_Buy()
-	
-	
-	//测试
-	public static void test() {
-		System.out.print("test");
+	//加载用户收藏夹
+	public static List<Map<String, Object>> SelectStar(String sql){
+		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(); 
+		//传过来的sql是根据userName查询UserStar
+		//select
+//		result=
+		
+		
+		return result;
 	}
-	
-	//用不到的
-	public static List<Object> handler(ResultSet rs, Class<?> clazz) {
-        List<Object> list = new ArrayList<>();
-        Object obj = null;
-        try {
-            while (rs.next()) {
-                // 创建一个clazz对象实例并将其赋给要返回的那个返回值。
-                obj = clazz.newInstance();
-                // 获取结果集的数据源
-                ResultSetMetaData rsmeta = rs.getMetaData();
- 
-                // 获取结果集中的字段数
-                int count = rsmeta.getColumnCount();
- 
-                // 循环取出个字段的名字以及他们的值并将其作为值赋给对应的实体对象的属性
-                for (int i = 0; i < count; i++) {
-                    // 获取字段名
-                    String name = rsmeta.getColumnName(i + 1);
-                    // 利用反射将结果集中的字段名与实体对象中的属性名相对应，由于
-                    // 对象的属性都是私有的所以要想访问必须加上getDeclaredField(name)和
-                    Field f = obj.getClass().getDeclaredField(name);
-                    f.setAccessible(true);
-                    // 将结果集中的值赋给相应的对象实体的属性
-                    f.set(obj, rs.getObject(name));
-                }
-                list.add(obj);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
-//	public static Book reBook(Map<String, Object> rs) {
-//		Book book=null;
-//		book.BookID=""+rs.get("BookID");
-//		return book;
-//	}
 }

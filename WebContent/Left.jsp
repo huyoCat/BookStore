@@ -15,13 +15,13 @@
 		<table border="3px" align="center" cellspacing="10px">
 			<tr><th>书籍类别</th></tr>
 		<%
-			String sql="select TypeName from BookType";
-			List<Map<String, Object>> rs=helperClass.SelectSQL(sql);
-			if(rs==null){
+			String sqlBType="select TypeName from BookType";
+			List<Map<String, Object>> rsBType=helperClass.SelectSQL(sqlBType);
+			if(rsBType.size()==0){
 				out.println("数据错误！显示图书类别失败！");
 			}
 			else{
-				for(Map<String, Object> item:rs){
+				for(Map<String, Object> item:rsBType){
 					%>
 					<tr><td><%=""+item.get("TypeName") %></td></tr>
 					<%

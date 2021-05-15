@@ -33,19 +33,31 @@
 							String sql2="select * from BookInfo";
 							List<Map<String, Object>> rs2=helperClass.SelectSQL(sql2);
 							
-							if(null==rs2){//如果查询不到数据
+							if(rs2.size()==0){//如果查询不到数据
 								out.println("数据错误！");
 							}
 							else{
 								List<Book> bookList=helperClass.reBook(rs2);
-								if(null==bookList){//如果查询不到数据
+								if(bookList.size()==0){//如果查询不到数据
 									out.println("数据错误！");
 								}
 								else{
+									Set<String> ISBNSet=new TreeSet<>();
 									for(Book book:bookList){
-										%>
+										//如果可以加进列表，说明没有重复，可以在列表显示
+										if(ISBNSet.add(book.getBookISBN())){
+											%>
 											<tr>
-												<td><img src=<%=book.getBookPic() %> width="150px"></td>
+												<td><%
+												if(book.getBookPic().equals("picture/")){
+													out.print("暂无图片");
+												}
+												else{
+													%>
+													<img src=<%=book.getBookPic() %> width="150px">
+													<%
+												}
+												%></td>
 												<td><%=book.getBookName() %></td>
 												<td>作者：<%=book.getBookWriter() %><br>
 													出版社：<%=book.getBookPublisher() %><br>
@@ -55,9 +67,12 @@
 												</td>
 												<td>
 <!-- 													<form action=""> -->
-													<input type="hidden" name="ID" value="<%=book.getBookID() %>">
-													<a href="U_Car.jsp?ID=<%=book.getBookID() %>">购买</a>
-													<a href="U_Star.jsp">收藏</a>
+													<input type="hidden" name="ID" value="<%=book.getBookISBN() %>">
+													<a href="U_Car.jsp?ID=<%=book.getBookISBN() %>">购买</a>
+<!-- 													这里做点了收藏不需要跳转，跳出来一个框提示收藏成功 -->
+													<form method="post">
+														<a href="U_Star.jsp?ID=<%=book.getBookISBN() %>">收藏</a>
+													</form>
 <!-- 														<input type="submit" value="收藏" name="star"><br> -->
 <!-- 														<input type="submit" value="加入购物车" name="add"><br> -->
 <!-- 														<input type="submit" value="立即购买" name="buy"> -->
@@ -65,6 +80,7 @@
 												</td>
 											</tr>
 										<%
+										}
 									}
 								}
 							}
