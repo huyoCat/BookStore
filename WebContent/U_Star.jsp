@@ -20,6 +20,10 @@
 		if(null==session.getAttribute("UserName")
 		||("".equals(session.getAttribute("UserName").toString()))){
 			out.println("请先登录网站！");
+			%>
+			<br><a href="Login.jsp">登录</a><br>
+			<a href="Register.jsp">注册</a>
+			<%
 		}
 		else{//已登录
 			String UserName=session.getAttribute("UserName").toString();
@@ -33,24 +37,38 @@
 				List<Map<String, Object>> StarList=helperClass.SelectSQL(SelectStar);
 				if(StarList.size()==0){
 					out.print("取消收藏的查询结果集失败！");
+					%>
+					<a href="Index.jsp">返回首页</a>
+					<%
 				}
 				else{
 					String NowStar=StarList.get(0).get("UserStar").toString();
 					String[] strArr=NowStar.split(",");
 					String NowInter="";
-					for(String str:strArr){
-						if(str.equals(deleStar)){
+					for(int i=0;i<strArr.length;i++){
+						if(strArr[i].equals(deleStar)){
 							continue;
 						}
-						NowInter+=","+str;
+						if(i==strArr.length-1){
+							NowInter+=strArr[i];
+						}
+						else{
+							NowInter+=strArr[i]+",";
+						}
 					}
 					String InserSQL="update UserInfo set UserStar='"+NowInter+"' where UserName='"+UserName+"'";
 					boolean flag=helperClass.SQL_ZSG(InserSQL);
 					if(flag){
 						out.print("取消收藏成功！");
+						%>
+						<a href="Index.jsp">返回首页</a>
+						<%
 					}
 					else{
 						out.print("取消收藏失败！");
+						%>
+						<a href="U_Star.jsp">点击刷新</a>
+						<%
 					}
 				}
 			}
@@ -65,6 +83,9 @@
 				List<Map<String, Object>> StarList=helperClass.SelectSQL(SelectStar);
 				if(StarList.size()==0){
 					out.print("查询结果集失败！");
+					%>
+					<a href="Index.jsp">返回首页</a>
+					<%
 				}
 				else{
 					if(null==StarList.get(0).get("UserStar")||//如果收藏为空直接插入
@@ -74,10 +95,16 @@
 						boolean flag=helperClass.SQL_ZSG(InserSql);
 						if(flag){
 							out.print("收藏成功！");
+							%>
+							<a href="Index.jsp">返回首页</a>
+							<%
 // 							response.sendRedirect("U_Star.jsp");
 						}
 						else{
 							out.print("收藏失败！");
+							%>
+							<a href="Index.jsp">返回首页重新收藏</a>
+							<%
 // 							response.sendRedirect("U_Star.jsp");
 						}
 					}
@@ -89,6 +116,9 @@
 							//如果有相同的显示已收藏
 							if(str.equals(StarID)){
 								out.print("书籍已经收藏过啦");
+								%>
+								<a href="Index.jsp">返回首页</a>
+								<%
 								IsStar=true;
 								break;
 							}
@@ -99,9 +129,15 @@
 							boolean flagA=helperClass.SQL_ZSG(SqlAStar);
 							if(flagA){
 								out.print("书籍收藏成功");
+								%>
+								<a href="Index.jsp">返回首页</a>
+								<%
 							}
 							else{
 								out.print("书籍收藏失败");
+								%>
+								<a href="Index.jsp">返回首页重新收藏</a>
+								<%
 							}
 						}
 					}
@@ -129,6 +165,9 @@
 				if(null==StarList.get(0).get("UserStar")||
 				"".equals(StarList.get(0).get("UserStar").toString())){
 					out.print("当前没有收藏任何书籍");
+					%>
+					<a href="Index.jsp">返回首页</a>
+					<%
 				}
 				else{
 					String StarStr=StarList.get(0).get("UserStar").toString();
@@ -176,6 +215,9 @@
 							}
 							else{
 								out.print("书籍列表转换失败");
+								%>
+								<a href="Index.jsp">返回首页</a>
+								<%
 							}
 						}
 					}

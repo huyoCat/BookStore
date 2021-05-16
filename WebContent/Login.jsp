@@ -45,25 +45,54 @@
 				String UserName=request.getParameter("userName");
 				String UserPwd=request.getParameter("password");
 				
-				if(!("".equals(UserName))&&UserName!=null&&
-						!("".equals(UserPwd))&&UserPwd!=null){
-					String sql1="select * from UserInfo where UserName='"+UserName+"'";
-					List<Map<String, Object>> rs1=helperClass.SelectSQL(sql1);
-					
-					if(rs1.size()==0){//如果查询不到数据
-						out.println("该用户不存在！");
-					}
-					else{
-						for(Map<String, Object> item:rs1){
-							if(UserPwd.equals(""+item.get("UserPwd"))){
-								//登录成功，重定向到主页，记录session信息
-								session.setAttribute("UserName", UserName);
-								session.setAttribute("UserPwd", UserPwd);
-								response.sendRedirect("Index.jsp");
-// 								out.println("欢迎登录！"+UserName+"！");
+				//如果是管理员
+				if(null!=request.getParameter("iden")){
+					if(!("".equals(UserName))&&UserName!=null&&
+							!("".equals(UserPwd))&&UserPwd!=null){
+						String sql1="select * from ADInfo where ADName='"+UserName+"'";
+						List<Map<String, Object>> rs1=helperClass.SelectSQL(sql1);
+						if(rs1.size()==0){//如果查询不到数据
+							out.println("该管理员不存在！");
+						}
+						else{
+							for(Map<String, Object> item:rs1){
+								if(UserPwd.equals(""+item.get("ADPwd"))){
+									//登录成功，重定向到主页，记录session信息
+									session.setAttribute("UserName", UserName);
+									session.setAttribute("UserName", UserPwd);
+									session.setAttribute("iden", "iden");
+									response.sendRedirect("Index.jsp");
+//	 								out.println("欢迎登录！"+UserName+"！");
+								}
+								else{
+									out.println("密码错误，请重新输入密码。");
+								}
 							}
-							else{
-								out.println("密码错误，请重新输入密码。");
+						}
+					}
+					
+				}
+				else{
+					if(!("".equals(UserName))&&UserName!=null&&
+							!("".equals(UserPwd))&&UserPwd!=null){
+						String sql1="select * from UserInfo where UserName='"+UserName+"'";
+						List<Map<String, Object>> rs1=helperClass.SelectSQL(sql1);
+						
+						if(rs1.size()==0){//如果查询不到数据
+							out.println("该用户不存在！");
+						}
+						else{
+							for(Map<String, Object> item:rs1){
+								if(UserPwd.equals(""+item.get("UserPwd"))){
+									//登录成功，重定向到主页，记录session信息
+									session.setAttribute("UserName", UserName);
+									session.setAttribute("UserPwd", UserPwd);
+									response.sendRedirect("Index.jsp");
+//	 								out.println("欢迎登录！"+UserName+"！");
+								}
+								else{
+									out.println("密码错误，请重新输入密码。");
+								}
 							}
 						}
 					}

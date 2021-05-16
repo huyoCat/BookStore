@@ -32,46 +32,27 @@
 			<form action="" method="post" onSubmit="return check();">
 				账号：&nbsp;<input type="text" name="userName"><br><br>
 				密码：&nbsp;<input type="password" name="password"><br><br>
-				是否管理员：<input type="radio" value="AD" name="iden">&nbsp;&nbsp;
+<!-- 				是否管理员：<input type="radio" value="AD" name="iden">&nbsp;&nbsp; -->
 				<input type="submit" value="注册">&nbsp;&nbsp;
 				<input type="reset" value="清空">
 			</form>
 			<%
-				String iden = request.getParameter("iden");
+// 				String iden = request.getParameter("iden");
 				String UserName=request.getParameter("userName");
 				String UserPwd=request.getParameter("password");
-				if(iden==null||"".equals(iden)){
-					//处理注册信息,如果不是管理员
-					if((!"".equals(UserName))&&UserName!=null&&
-							(!"".equals(UserPwd))&&UserPwd!=null){
-						String sqlRegister="insert into UserInfo (UserName,UserPwd) values('"+UserName+"','"+UserPwd+"')";
-						boolean flag=helperClass.SQL_ZSG(sqlRegister);
-						if(flag){
-							//记录session
-//	 						返回首页，右边上面显示已登录样式
-							session.setAttribute("UserName", UserName);
-							session.setAttribute("UserPwd", UserPwd);
-						}
-						else{
-							out.println("注册失败！账号已存在！");
-						}
+				
+				if((!"".equals(UserName))&&UserName!=null&&
+						(!"".equals(UserPwd))&&UserPwd!=null){
+					String sqlRegister="insert into UserInfo (UserName,UserPwd) values('"+UserName+"','"+UserPwd+"')";
+					boolean flag=helperClass.SQL_ZSG(sqlRegister);
+					if(flag){
+						//记录session
+// 						返回首页，右边上面显示已登录样式
+						session.setAttribute("UserName", UserName);
+						session.setAttribute("UserPwd", UserPwd);
 					}
-				}
-				else{//如果是管理员
-					if((!"".equals(UserName))&&UserName!=null&&
-							(!"".equals(UserPwd))&&UserPwd!=null){
-						String sqlRegister="inser into ADInfo (ADName,ADPwd) values('"+UserName+"','"+UserPwd+"')";
-						boolean flag=helperClass.SQL_ZSG(sqlRegister);
-						if(flag){
-							//记录session
-//	 						返回首页，右边上面显示已登录样式
-							session.setAttribute("UserName", UserName);
-							session.setAttribute("UserPwd", UserPwd);
-							response.sendRedirect("Index.jsp");
-						}
-						else{
-							out.println("注册失败！账号已存在！");
-						}
+					else{
+						out.println("注册失败！账号已存在！");
 					}
 				}
 			%>

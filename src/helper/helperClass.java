@@ -2,6 +2,7 @@ package helper;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -204,14 +205,24 @@ public class helperClass {
 		return BookList;
 	}
 
-	//加载用户收藏夹
-	public static List<Map<String, Object>> SelectStar(String sql){
-		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(); 
-		//传过来的sql是根据userName查询UserStar
-		//select
-//		result=
-		
-		
+	
+//	获取今天的日期
+	public static String getDate() {
+		Date date = new Date(System.currentTimeMillis()); 
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");  
+		String result=formatter.format(date);
 		return result;
 	}
+	
+	//加载用户收藏夹
+//	public static List<Map<String, Object>> SelectStar(String sql){
+//		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(); 
+//		//传过来的sql是根据userName查询UserStar
+//		//select
+////		result=
+//		
+//		
+//		return result;
+//	}
 }

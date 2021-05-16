@@ -11,30 +11,56 @@
 <body>
 	<div id="Left">
 <!-- 		通过循环加载图书分类 -->
-		
-		<table border="3px" align="center" cellspacing="10px">
-			<tr><th>书籍类别</th></tr>
 		<%
-			String sqlBType="select TypeName from BookType";
-			List<Map<String, Object>> rsBType=helperClass.SelectSQL(sqlBType);
-			if(rsBType.size()==0){
-				out.println("数据错误！显示图书类别失败！");
+// 		已经登录的状态
+		if(null!=session.getAttribute("UserName")){
+			if(null!=session.getAttribute("iden")){//是管理员
+				%>
+				<table>
+				<tr><td><a href="Index.jsp">网站首页</a></td></tr>
+				<tr><td><a>管理书籍</a></td></tr>
+				<tr><td><a>管理书籍类别</a></td></tr>
+				<tr><td><a>管理用户</a></td></tr>
+				<tr><td><a>管理订单</a></td></tr>
+				</table>
+				<%
 			}
 			else{
-				for(Map<String, Object> item:rsBType){
-					%>
-					<tr><td><%=""+item.get("TypeName") %></td></tr>
-					<%
-				}
-				
+				%>
+				<table>
+				<tr><td><a href="Index.jsp">网站首页</a></td></tr>
+				<tr><td><a href="U_Star.jsp">收藏夹</a></td></tr>
+				<tr><td><a href="U_Car.jsp">购物车</a></td></tr>
+				<tr><td><a>历史订单</a></td></tr>
+				<tr><td><a>修改密码</a></td></tr>
+				</table>
+				<%
 			}
+		}
+		else{
+			%>
+			<table border="3px" align="center" cellspacing="10px">
+				<tr><th>书籍类别</th></tr>
+			<%
+				String sqlBType="select TypeName from BookType";
+				List<Map<String, Object>> rsBType=helperClass.SelectSQL(sqlBType);
+				if(rsBType.size()==0){
+					out.println("数据错误！显示图书类别失败！");
+				}
+				else{
+					for(Map<String, Object> item:rsBType){
+						%>
+						<tr><td><%=""+item.get("TypeName") %></td></tr>
+						<%
+					}
+					
+				}
+			%>
+			</table>
+			<%
+		}
 		%>
-			
-		</table>
-<!-- 		<img id="tag" src="picture/个人中心.png"> -->
-<!-- 		<img id="tag" src="picture/购物车.png"> -->
-<!-- 		<img id="tag" src="picture/收藏夹.png"> -->
-<!-- 		<img id="tag" src="picture/我的订单.png"> -->
+
 	</div>
 </body>
 </html>
