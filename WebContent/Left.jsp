@@ -22,7 +22,7 @@
 				<tr><td><a href="A_DeleBook.jsp">删除/修改书籍信息</a></td></tr>
 				<tr><td><a>管理书籍类别</a></td></tr>
 				<tr><td><a>管理用户</a></td></tr>
-				<tr><td><a>管理订单</a></td></tr>
+				<tr><td><a href="A_MaOrder.jsp">管理订单</a></td></tr>
 				</table>
 				<%
 			}

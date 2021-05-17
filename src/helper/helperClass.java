@@ -206,6 +206,60 @@ public class helperClass {
 	}
 
 	
+	//结果集转化为Order类
+	public static List<Order> reOrder(List<Map<String, Object>> rs){
+		List<Order> OrderList=new ArrayList<>();
+		if(null==rs){//如果查询不到数据
+			System.out.println("数据错误！");
+		}
+		else {
+			for(Map<String, Object> item:rs){
+				Order order=new Order();
+				order.setOrderID(Integer.parseInt(""+item.get("OrderID")));
+				order.setBookList(""+item.get("BookList"));
+				order.setUserName(""+item.get("UserName"));
+				order.setTotalPrice(Float.parseFloat(""+item.get("TotalPrice")));
+				order.setOrderDay(""+item.get("OrderDay"));
+				order.setAddress(""+item.get("Address"));
+				order.setPhone(""+item.get("Phone"));
+				order.setOrderstate(Integer.parseInt(""+item.get("Orderstate")));
+				OrderList.add(order);
+			}
+		}
+		return OrderList;
+	}
+	
+	//获取用户订单里的图书列表
+	public static List<String> OrderBook(String BookList) {
+		List<String> result=new ArrayList<>();
+		
+		String[] BookArr=BookList.split(";");
+		
+		for(String str:BookArr){
+			String inResult="";
+			String[] inBook=str.split(",");
+//			inlist.add(inBook);//[ISBN,数量]
+			String sql="select * from BookInfo where BookISBN='"+inBook[0]+"'";
+			List<Map<String, Object>> rs=helperClass.SelectSQL(sql);
+			if(rs.size()==0){//如果查询不到数据
+				System.out.println("数据错误！");
+			}
+			else{
+				List<Book> bookList=helperClass.reBook(rs);
+				if(bookList.size()==0){//如果查询不到数据
+					System.out.println("数据错误！");
+				}
+				else{
+					Book book=bookList.get(0);
+					inResult="书籍名称："+book.getBookName()+"<BR>书籍ISBN:"+book.getBookISBN()+"<BR>购买数量："+inBook[1];
+					result.add(inResult);
+				}
+			}
+		}
+		return result;
+	}
+	
+	
 //	获取今天的日期
 	public static String getDate() {
 		Date date = new Date(System.currentTimeMillis()); 
@@ -215,14 +269,4 @@ public class helperClass {
 		return result;
 	}
 	
-	//加载用户收藏夹
-//	public static List<Map<String, Object>> SelectStar(String sql){
-//		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(); 
-//		//传过来的sql是根据userName查询UserStar
-//		//select
-////		result=
-//		
-//		
-//		return result;
-//	}
 }

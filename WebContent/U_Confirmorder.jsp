@@ -29,9 +29,11 @@
 			String UserName=session.getAttribute("UserName").toString();
 			
 // 			确定获取的信息不为空
-			if(null!=request.getParameter("phone")&&null!=request.getParameter("address")){
-				String Address=request.getParameter("address").toString();
-				String Phone=request.getParameter("phone").toString();
+			if(null!=request.getParameter("phone")&&!("".equals(""+request.getParameter("phone")))
+			&&null!=request.getParameter("address")&&!("".equals(""+request.getParameter("address")))){
+				
+				String Address=""+request.getParameter("address");
+				String Phone=""+request.getParameter("phone");
 				
 				String[] ISBN=request.getParameterValues("ISBN");
 				String[] number=request.getParameterValues("number");
@@ -48,16 +50,16 @@
 				String BookList="";
 				for(int i=0;i<ISBN.length;i++){
 					if(i==ISBN.length-1){
-						BookList+=ISBN[i]+","+number[i]+";";
+						BookList+=ISBN[i]+","+number[i];
 					}
 					else{
-						BookList+=ISBN[i]+","+number[i];
+						BookList+=ISBN[i]+","+number[i]+";";
 					}
 				}
 				
 				//修改书籍库信息,BookInfo要改，OrderInfo也要改
 // 				修改OrderInfo
-				String OrderSql="insert into OrderInfo values('"+BookList+"','"+UserName+"',"+TotalPrice+",'"+OrderDay+"','"+Address+"','"+Phone+"')";
+				String OrderSql="insert into OrderInfo (BookList,UserName,TotalPrice,OrderDay,Address,Phone) values('"+BookList+"','"+UserName+"',"+TotalPrice+",'"+OrderDay+"','"+Address+"','"+Phone+"')";
 				boolean Orderflag=helperClass.SQL_ZSG(OrderSql);
 				if(Orderflag){
 					out.print("订单信息添加成功！");

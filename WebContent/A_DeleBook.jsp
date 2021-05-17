@@ -9,9 +9,7 @@
 	<script type="text/javascript">
 		function Deleting(ISBN){
 			var BookISBN=ISBN;
-// 			alert(BookISBN);
 			var flag=confirm("确认删除书籍？");
-// 			String url="A_DeleBook.jsp?ISBN="+BookISBN+"&msg=delete";
 			if(flag){
 				window.location.href="A_DeleBook.jsp?ISBN="+BookISBN+"&msg=delete";
 			}
@@ -41,9 +39,9 @@
 			
 			String SelectBookInfo="select * from BookInfo where 1=1";
 			//如果有搜索限制条件
-			if(null!=request.getParameter("limit")){
+			if(!("null".equals(""+request.getParameter("limit")))){
 				//如果搜索框无数值
-				if(null==request.getParameter("search")){
+				if(null==request.getParameter("search")||"".equals(request.getParameter("search").toString())){
 					out.print("请输入搜索关键词");
 				}
 				else{
@@ -59,19 +57,6 @@
 			if(null!=request.getParameter("msg")&&
 					"delete".equals(request.getParameter("msg").toString())){//删除
 				
-// 				out.print("<script>confirm('确认删除书籍？')</script>");
-					
-				//获取ScriptEngineManager对象
-// 				ScriptEngineManager manager = new ScriptEngineManager();
-// 				//获取JavaScript执行引擎
-// 				ScriptEngine engine = manager.getEngineByName("js");
-// 				String js="function Deleting(){var flag=confirm('确认删除书籍？');return flag;}";
-// 				engine.eval(js);
-// 				Invocable inv = (Invocable)engine;
-// 				Object eval = inv.invokeFunction("Deleting");
-// 				boolean flag=(boolean)eval;
-// 				out.print("确认删除");
-				
 				String BookISBN=request.getParameter("ISBN");
 				String deleSql="delete from BookInfo where BookISBN='"+BookISBN+"'";
 				boolean flagDele=helperClass.SQL_ZSG(deleSql);
@@ -80,20 +65,8 @@
 				}
 				else{
 					out.print("书籍删除失败");
-				}
-				
-// 				if()
-// 				out.print(flag);
-				
+				}	
 			}
-			
-// 			if(null!=request.getParameter("xiugai")){//修改
-// 				String xiugaiBookISBN=request.getParameter("ISBN");
-// 				session.setAttribute("xiugaiBookISBN", xiugaiBookISBN);
-// 				response.sendRedirect("A_xiugaiBokk.jsp");
-// 				String xiuSQL="u";
-// 			}
-			
 			
 			//什么都没有的时候显示书籍列表
 			%>
@@ -101,6 +74,7 @@
 				<div>
 <!-- 					搜索条件 -->
 					<select name="limit">
+						<option value="null">选择搜索条件</option>
 						<option value="BookISBN">按书籍编号搜索</option>
 						<option value="BookName">按书籍名称搜索</option>
 						<option value="BookType">按书籍类别搜索</option>
@@ -161,7 +135,7 @@
 										</td>
 										
 										<td>
-											<a href="A_xiugaiBokk.jsp?ISBN=<%=book.getBookISBN() %>">修改信息</a><br>
+											<a href="A_xiugaiBook.jsp?ISBN=<%=book.getBookISBN() %>">修改信息</a><br>
 											
 											<a href="#" onClick="Deleting(<%=book.getBookISBN() %>)">删除书籍</a>
 										</td>
