@@ -60,8 +60,7 @@
 									%>
 									<tr>
 										<td>
-										书名：<label name=""></label>
-										
+										书名：
 										<input type="text" value="<%=book.getBookName() %>" readOnly><br>
 										ISBN:<input type="text" name="ISBN" value="<%=book.getBookISBN() %>" readOnly><br>
 										购买数量：<input type="text" name="number" value="<%=number[i] %>" readOnly>

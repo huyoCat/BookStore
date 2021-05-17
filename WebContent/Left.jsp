@@ -14,7 +14,7 @@
 		<%
 // 		已经登录的状态
 		if(null!=session.getAttribute("UserName")){
-			if(null!=session.getAttribute("iden")){//是管理员
+			if(null!=session.getAttribute("iden")&&("iden".equals(""+session.getAttribute("iden")))){//是管理员
 				%>
 				<table>
 				<tr><td><a href="Index.jsp">网站首页</a></td></tr>
@@ -32,7 +32,7 @@
 				<tr><td><a href="Index.jsp">网站首页</a></td></tr>
 				<tr><td><a href="U_Star.jsp">收藏夹</a></td></tr>
 				<tr><td><a href="U_Car.jsp">购物车</a></td></tr>
-				<tr><td><a>历史订单</a></td></tr>
+				<tr><td><a href="U_hisOrder.jsp">历史订单</a></td></tr>
 				<tr><td><a>修改密码</a></td></tr>
 				</table>
 				<%

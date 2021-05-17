@@ -16,6 +16,8 @@ public class Book {
 	private String BookInDay;
 	private String BookOutDay;
 	private int BookCount;
+	private int IsSell;
+	
 	public int getBookID() {
 		return BookID;
 	}
@@ -99,5 +101,11 @@ public class Book {
 	}
 	public void setBookISBN(String bookISBN) {
 		BookISBN = bookISBN;
+	}
+	public int getIsSell() {
+		return IsSell;
+	}
+	public void setIsSell(int isSell) {
+		IsSell = isSell;
 	}
 }

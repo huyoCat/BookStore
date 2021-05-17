@@ -199,6 +199,7 @@ public class helperClass {
 				book.setBookInDay(""+item.get("BookInDay"));
 				book.setBookOutDay(""+item.get("BookOutDay"));
 				book.setBookCount(Integer.parseInt(""+item.get("BookCount")));
+				book.setIsSell(Integer.parseInt(""+item.get("IsSell")));
 				BookList.add(book);
 			}
 		}
@@ -223,6 +224,7 @@ public class helperClass {
 				order.setAddress(""+item.get("Address"));
 				order.setPhone(""+item.get("Phone"));
 				order.setOrderstate(Integer.parseInt(""+item.get("Orderstate")));
+				order.setCancelOrder(Integer.parseInt(""+item.get("CancelOrder")));
 				OrderList.add(order);
 			}
 		}
@@ -259,6 +261,42 @@ public class helperClass {
 		return result;
 	}
 	
+	
+	//用户修改订单信息用到的数据
+	public static List<Book_Number> updateOrder(String BookList){
+		List<Book_Number> result=new ArrayList<>();
+//		Map<Book,Integer> map=new TreeMap<>();
+		
+		String[] BookArr=BookList.split(";");
+		
+		for(String str:BookArr){
+//			String inResult="";
+			Book_Number inList=new Book_Number();
+			String[] inBook=str.split(",");
+			
+//			inlist.add(inBook);//[ISBN,数量]
+			String sql="select * from BookInfo where BookISBN='"+inBook[0]+"'";
+			List<Map<String, Object>> rs=helperClass.SelectSQL(sql);
+			if(rs.size()==0){//如果查询不到数据
+				System.out.println("数据错误！");
+			}
+			else{
+				List<Book> bookList=helperClass.reBook(rs);
+				if(bookList.size()==0){//如果查询不到数据
+					System.out.println("数据错误！");
+				}
+				else{
+					Book book=bookList.get(0);
+//					inResult="书籍名称："+book.getBookName()+"<BR>书籍ISBN:"+book.getBookISBN()+"<BR>购买数量："+inBook[1];
+					inList.setBook(book);
+					inList.setNumber(Integer.parseInt(inBook[1]));
+					result.add(inList);
+				}
+			}
+		}
+		
+		return result;
+	}
 	
 //	获取今天的日期
 	public static String getDate() {
