@@ -29,10 +29,10 @@
 		
 <!-- 	ËÑË÷¿ò -->
 		<div id="titleBt">
-			<form action="">
-				<input type="text" id="searchBox">
-				<input type="button" id="searchButton" value="search">
-			</form>
+<!-- 			<form action=""> -->
+<!-- 				<input type="text" id="searchBox"> -->
+<!-- 				<input type="button" id="searchButton" value="search"> -->
+<!-- 			</form> -->
 		</div>
 <!-- 		ÒÑµÇÂ¼ -->
 		<%
