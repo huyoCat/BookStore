@@ -23,11 +23,20 @@ public class helperClass {
 		}
 		return result;
 	}
+		
 	
 	//连接数据库 查询操作 添加书籍用
-	public static List<Map<String, Object>> SelectSQL(String sql) {
+	public static List<Map<String, Object>> SelectSQL(String Bsql) {
 		// 加载JDBC-ODBC桥驱动驱动程序
 		//String Driver="sun.jdbc.odbc.JdbcOdbcDriver";
+		String sql="";
+		try {
+			sql = new String(Bsql.getBytes("ISO-8859-1"), "gb2312");
+		} catch (UnsupportedEncodingException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 		} catch (ClassNotFoundException e) {

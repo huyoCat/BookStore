@@ -21,7 +21,7 @@
 			<%
 // 		接收需要修改的ISBN
 			if(null!=request.getParameter("ISBN")){
-				String BookISBN=request.getParameter("ISBN").toString();
+				String BookISBN=""+request.getParameter("ISBN");
 				
 				String sqlXiugai="select * from BookInfo where BookISBN='"+BookISBN+"'";
 				List<Map<String, Object>> rsXiuGai=helperClass.SelectSQL(sqlXiugai);

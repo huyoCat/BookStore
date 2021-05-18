@@ -53,7 +53,7 @@
 			}
 			
 			
-			//如果修改或者删除了书籍
+			//如果删除了书籍
 			if(null!=request.getParameter("msg")&&
 					"delete".equals(request.getParameter("msg").toString())){//删除
 				

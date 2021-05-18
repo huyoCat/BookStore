@@ -48,13 +48,13 @@
 						if(strArr[i].equals(DeleID)){
 							continue;
 						}
-						if(i==strArr.length-1){
-							NowInter+=strArr[i];
-						}
-						else{
-							NowInter+=strArr[i]+",";
-						}
+						NowInter+=strArr[i]+",";
 					}
+					
+					if(NowInter.charAt(NowInter.length()-1)==','){
+						NowInter=NowInter.substring(0, NowInter.length()-1);
+					}
+					
 					String InserSQL="update UserInfo set UserBuyCar='"+NowInter+"' where UserName='"+UserName+"'";
 					boolean flag=helperClass.SQL_ZSG(InserSQL);
 					if(flag){
@@ -92,13 +92,13 @@
 						String InsertCar="update UserInfo set UserBuyCar='"+BISBN+"' where UserName='"+UserName+"'";
 						boolean flag=helperClass.SQL_ZSG(InsertCar);
 						if(flag){
-							out.print("收藏成功！");
+							out.print("加入购物车成功！");
 							%>
 							<a href="Index.jsp">返回首页</a>
 							<%
 						}
 						else{
-							out.print("收藏失败！");
+							out.print("加入购物车失败！");
 							%>
 							<a href="Index.jsp">返回首页重新添加</a>
 							<%

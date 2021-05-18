@@ -62,7 +62,23 @@
 				String OrderSql="insert into OrderInfo (BookList,UserName,TotalPrice,OrderDay,Address,Phone) values('"+BookList+"','"+UserName+"',"+TotalPrice+",'"+OrderDay+"','"+Address+"','"+Phone+"')";
 				boolean Orderflag=helperClass.SQL_ZSG(OrderSql);
 				if(Orderflag){
-					out.print("订单信息添加成功！");
+					
+					//如果是修改的订单
+					if(null!=request.getParameter("msg")&&
+						("updateOrder").equals(""+request.getParameter("msg"))){
+						String OrderID=""+request.getParameter("OrderID");
+						
+						String updateSql="update OrderInfo set CancelOrder=1 where OrderID="+OrderID+"";
+						boolean Deflag=helperClass.SQL_ZSG(updateSql);
+						if(Deflag){
+							out.println("原订单撤销成功！");
+						}
+						else{
+							out.println("原订单撤销失败！");
+						}
+					}
+					
+					out.print("新订单信息添加成功！");
 					%>
 					<a href="Index.jsp">返回首页</a>
 					<%

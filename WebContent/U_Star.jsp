@@ -49,12 +49,10 @@
 						if(strArr[i].equals(deleStar)){
 							continue;
 						}
-						if(i==strArr.length-1){
-							NowInter+=strArr[i];
-						}
-						else{
-							NowInter+=strArr[i]+",";
-						}
+						NowInter+=strArr[i]+",";
+					}
+					if(NowInter.charAt(NowInter.length()-1)==','){
+						NowInter=NowInter.substring(0, NowInter.length()-1);
 					}
 					String InserSQL="update UserInfo set UserStar='"+NowInter+"' where UserName='"+UserName+"'";
 					boolean flag=helperClass.SQL_ZSG(InserSQL);
@@ -196,7 +194,8 @@
 									%>
 									</td>
 									
-									<td>作者：<%=book.getBookWriter() %><br>
+									<td>书名：<%=book.getBookName() %><br>
+										作者：<%=book.getBookWriter() %><br>
 										出版社：<%=book.getBookPublisher() %><br>
 										简介：<%=book.getBookIntro() %><br>
 										ISBN：<%=book.getBookISBN() %><br>

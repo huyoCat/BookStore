@@ -61,6 +61,7 @@
 					<% 
 					return;
 				}
+				
 				if(!helperClass.isDate(BookInDay)){
 					out.println("请确认进货日期填写正确！");
 					%>

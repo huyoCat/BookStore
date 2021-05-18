@@ -31,13 +31,13 @@
 <!-- 					连接数据库获取数据 ，下面是循环显示-->
 						<%
 							String sql2="select * from BookInfo";
-							List<Map<String, Object>> rs2=helperClass.SelectSQL(sql2);
+							List<Map<String, Object>> rsList=helperClass.SelectSQL(sql2);
 							
-							if(rs2.size()==0){//如果查询不到数据
+							if(rsList.size()==0){//如果查询不到数据
 								out.println("数据错误！");
 							}
 							else{
-								List<Book> bookList=helperClass.reBook(rs2);
+								List<Book> bookList=helperClass.reBook(rsList);
 								if(bookList.size()==0){//如果查询不到数据
 									out.println("数据错误！");
 								}
@@ -63,12 +63,13 @@
 													出版社：<%=book.getBookPublisher() %><br>
 													简介：<%=book.getBookIntro() %><br>
 													ISBN：<%=book.getBookISBN() %><br>
+													图书类别：<%=book.getBookType() %><br>
 													售价：<%=book.getBookSell() %>
 												</td>
 												<td>
 <!-- 													<form action=""> -->
 													<input type="hidden" name="ID" value="<%=book.getBookISBN() %>">
-													<a href="U_Car.jsp?ID=<%=book.getBookISBN() %>">购买</a>
+													<a href="U_Car.jsp?ID=<%=book.getBookISBN() %>">加入购物车</a>
 <!-- 													这里做点了收藏不需要跳转，跳出来一个框提示收藏成功 -->
 													<form method="post">
 														<a href="U_Star.jsp?ID=<%=book.getBookISBN() %>">收藏</a>
