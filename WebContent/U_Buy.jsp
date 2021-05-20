@@ -27,6 +27,17 @@
 		}
 		else{//已登录
 			String UserName=session.getAttribute("UserName").toString();
+			//获取用户信息
+			String SelectInfo="select * from UserInfo where UserName='"+UserName+"'";
+			User user=new User();
+			List<Map<String, Object>> GetUser=helperClass.SelectSQL(SelectInfo);
+			if(GetUser.size()!=0){
+				List<User> userList=helperClass.reUser(GetUser);
+				if(userList!=null){
+					user=userList.get(0);
+				}
+			}
+			
 			
 // 			如果传过来的信息不为空
 			if((null!=request.getParameterValues("BuyISBN"))&&
@@ -93,8 +104,8 @@
 					
 					<tr>
 						<td>
-							联系方式：<input type="text" name="phone"><br>
-							收货地址：<textarea name="address"></textarea>
+							联系方式：<input type="text" name="phone" value="<%=user.getUserPhone() %>"><br>
+							收货地址：<textarea name="address"><%=user.getUserAddress() %></textarea>
 						</td>
 					</tr>
 						
