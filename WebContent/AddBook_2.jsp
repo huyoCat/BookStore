@@ -62,6 +62,7 @@
 					return;
 				}
 				
+				
 				if(!helperClass.isDate(BookInDay)){
 					out.println("请确认进货日期填写正确！");
 					%>
@@ -81,7 +82,15 @@
 					<% 
 					return;
 				}
-				
+				//判断ISBN是否含中文
+				BookISBN=helperClass.zhuanma(BookISBN);
+				if(helperClass.isContainChinese(BookISBN)){
+					out.println("请确认ISBN不含中文！");
+					%>
+					<a href="javascript:history.back(-1)">返回重填</a>
+					<% 
+					return;
+				}
 				//查询有没有一样的ISBN，再存入   逻辑不对，可以插入，可以加一个一共多少本循环插入
 				
 				//存入数据

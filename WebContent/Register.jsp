@@ -43,17 +43,47 @@
 				
 				if((!"".equals(UserName))&&UserName!=null&&
 						(!"".equals(UserPwd))&&UserPwd!=null){
-					String sqlRegister="insert into UserInfo (UserName,UserPwd) values('"+UserName+"','"+UserPwd+"')";
-					boolean flag=helperClass.SQL_ZSG(sqlRegister);
-					if(flag){
-						//记录session
-// 						返回首页，右边上面显示已登录样式
-						session.setAttribute("UserName", UserName);
-						session.setAttribute("UserPwd", UserPwd);
+// 					判断是否含中文
+					UserName=helperClass.zhuanma(UserName);
+
+					boolean flagCON=helperClass.isContainChinese(UserName);
+					if(flagCON){
+						out.print("请输入非中文字符");
 					}
 					else{
-						out.println("注册失败！账号已存在！");
+// 						判断是否重名
+						String chekcSql="select UserName from UserInfo";
+						List<Map<String, Object>> StarList=helperClass.SelectSQL(chekcSql);
+						for(Map<String, Object> map:StarList){
+							if(UserName.equals(map.get("UserName"))){
+								out.println("注册失败！用户名已存在！");
+								return;
+							}
+						}
+						String sqlRegister="insert into UserInfo (UserName,UserPwd) values('"+UserName+"','"+UserPwd+"')";
+						boolean flag=helperClass.SQL_ZSG(sqlRegister);
+						if(flag){
+							//记录session
+//	 						返回首页，右边上面显示已登录样式
+// 							查询ID
+							String sql="select * from UserInfo where UserName='"+UserName+"'";
+							List<Map<String, Object>> List=helperClass.SelectSQL(sql);
+							String UserID="";
+							if(List.size()!=0){
+								UserID=""+List.get(0).get("UserID");
+							}
+							session.setAttribute("UserID", UserID);
+							session.setAttribute("UserName", UserName);
+							session.setAttribute("UserPwd", UserPwd);
+							%>
+							<a href="Login.jsp">注册成功！去登录</a>
+							<%
+						}
+						else{
+							out.println("注册失败，请重新注册");
+						}
 					}
+					
 				}
 			%>
 		</div>

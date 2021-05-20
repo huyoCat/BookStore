@@ -21,7 +21,7 @@
 				<tr><td><a href="AddBook.jsp">添加书籍</a></td></tr>
 				<tr><td><a href="A_DeleBook.jsp">删除/修改书籍信息</a></td></tr>
 				<tr><td><a href="A_MaType.jsp">管理书籍类别</a></td></tr>
-				<tr><td><a>管理用户</a></td></tr>
+				<tr><td><a href="A_MaUser.jsp">管理用户</a></td></tr>
 				<tr><td><a href="A_MaOrder.jsp">管理订单</a></td></tr>
 				</table>
 				<%
@@ -33,7 +33,7 @@
 				<tr><td><a href="U_Star.jsp">收藏夹</a></td></tr>
 				<tr><td><a href="U_Car.jsp">购物车</a></td></tr>
 				<tr><td><a href="U_hisOrder.jsp">历史订单</a></td></tr>
-				<tr><td><a>修改密码</a></td></tr>
+				<tr><td><a href="U_UpdateMsg.jsp">修改个人信息</a></td></tr>
 				</table>
 				<%
 			}

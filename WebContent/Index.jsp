@@ -106,6 +106,14 @@
 													ISBN：<%=book.getBookISBN() %><br>
 													图书类别：<%=book.getBookType() %><br>
 													售价：<%=book.getBookSell() %>
+													
+													<%
+													if(null!=session.getAttribute("iden")){
+														%>
+														<br>库存数量：<%=book.getBookCount() %>
+														<%
+													}
+													%>
 												</td>
 												<%
 												if(null==session.getAttribute("iden")||!("iden".equals(""+session.getAttribute("iden")))){

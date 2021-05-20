@@ -33,7 +33,7 @@
 				%>
 				<div>
 					<form method="post">
-						
+						<input type="hidden" name="BeTypeName" value="<%=TypeName %>">
 						修改为：<input type="text" name="nowName">
 						<input type="submit" value="确定">
 					</form>
@@ -43,18 +43,19 @@
 				if(null!=request.getParameter("nowName")&&
 						!("".equals(request.getParameter("nowName")))){
 					String nowName=""+request.getParameter("nowName");
+					String BeTypeName=""+request.getParameter("BeTypeName");
 // 					先检测是否重名
 					String reNameSql="select TypeName from BookType where TypeName='"+nowName+"'";
 					if(!helperClass.IsReName(reNameSql)){
 						//没有重名修改BookInfo
-						String upda="update BookInfo set BookType='"+nowName+"' where BookType='"+TypeName+"'";
+						String upda="update BookInfo set BookType='"+nowName+"' where BookType='"+BeTypeName+"'";
 						boolean flagUp=helperClass.SQL_ZSG(upda);
 						if(flagUp){
 							//书籍信息修改成功，真正实施类型名的修改
 							String upSql="update BookType set TypeName='"+nowName+"' where TypeID='"+TypeID+"'";
 							boolean upTy=helperClass.SQL_ZSG(upSql);
 							if(upTy){
-								out.print("书籍类别修改成功");
+								response.sendRedirect("A_MaType.jsp");
 							}
 							else{
 								out.print("书籍类别修改失败");
@@ -68,8 +69,6 @@
 					else{
 						out.print("修改后的书籍类型名已经存在啦");
 					}
-					
-					
 				}
 				
 			}

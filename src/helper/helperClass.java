@@ -25,6 +25,17 @@ public class helperClass {
 	}
 		
 	
+	//检测是否含中文
+	public static boolean isContainChinese(String str) {
+		Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
+		Matcher m = p.matcher(str);
+		if (m.find()) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 	//连接数据库 查询操作 添加书籍用
 	public static List<Map<String, Object>> SelectSQL(String Bsql) {
 		// 加载JDBC-ODBC桥驱动驱动程序
@@ -238,6 +249,30 @@ public class helperClass {
 			}
 		}
 		return OrderList;
+	}
+	
+//	转化为User类
+	public static List<User> reUser(List<Map<String, Object>> rs){
+		List<User> UserList=new ArrayList<>();
+		if(null==rs){//如果查询不到数据
+			System.out.println("数据错误！");
+		}
+		else {
+			for(Map<String, Object> item:rs){
+				User user=new User();
+				user.setUserID(Integer.parseInt(""+item.get("UserID")));
+				user.setUserName(""+item.get("UserName"));
+				user.setUserPwd(""+item.get("UserPwd"));
+				user.setUserStar(""+item.get("UserStar"));
+				user.setUserBuyCar(""+item.get("UserBuyCar"));
+				user.setUserGrant(Integer.parseInt(""+item.get("UserGrant")));
+				user.setUserAddress(""+item.get("UserAddress"));
+				user.setUserPhone(""+item.get("UserPhone"));
+				UserList.add(user);
+			}
+		}
+		
+		return UserList;
 	}
 	
 	//获取用户订单里的图书列表

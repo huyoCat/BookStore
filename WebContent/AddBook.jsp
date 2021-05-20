@@ -27,6 +27,7 @@
 			<%
 		}
 		else{//ÒÑµÇÂ¼
+			
 			String UserName=session.getAttribute("UserName").toString();
 		
 			%>
