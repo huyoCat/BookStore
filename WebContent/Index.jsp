@@ -19,27 +19,68 @@
 		<%@ include file="Left.jsp"%>
 <!-- 	中间的图书列表 -->
 		<div id="bookTable">
+		<%
+		String sql2="select * from BookInfo where 1=1";
+		
+		//如果有搜索限制条件
+		if(!("null".equals(""+request.getParameter("limit")))){
+			//如果搜索框无数值
+			if(null==request.getParameter("search")||"".equals(request.getParameter("search").toString())){
+				out.print("请输入搜索关键词");
+			}
+			else{
+				String limit=request.getParameter("limit").toString();
+				String search=request.getParameter("search").toString();
+				sql2+=" and "+limit+" like '%'+'"+search+"'+'%'";
+			}
+			
+		}
+		
+		%>
+		
+		<form method="post">
+<!-- 		搜索框 -->
+			<div>
+				<select name="limit">
+					<option value="null">选择搜索条件</option>
+					<option value="BookISBN">按书籍编号搜索</option>
+					<option value="BookName">按书籍名称搜索</option>
+					<option value="BookType">按书籍类别搜索</option>
+					<option value="BookWriter">按书籍作者搜索</option>
+				</select>
+					
+				<input type="text" name="search">&nbsp;&nbsp;
+				<input type="submit" value="搜索">
+			
+			</div>
 		
 <!-- 					显示列表 -->
+			<div>
 			<table border="3px" align="center" cellspacing="10px">
 						<tr>
 							<th width="150px">图片</th>
 							<th width="200px">名称</th>
 							<th width="400px">详情</th>
-							<th width="200px"></th>
+							<%
+							if(null==session.getAttribute("iden")||!("iden".equals(""+session.getAttribute("iden")))){
+								%>
+								<th width="200px"></th>
+								<%
+							}
+							%>
 						</tr>
 <!-- 					连接数据库获取数据 ，下面是循环显示-->
 						<%
-							String sql2="select * from BookInfo";
+							
 							List<Map<String, Object>> rsList=helperClass.SelectSQL(sql2);
 							
 							if(rsList.size()==0){//如果查询不到数据
-								out.println("数据错误！");
+								out.println("无结果 或 数据错误！");
 							}
 							else{
 								List<Book> bookList=helperClass.reBook(rsList);
 								if(bookList.size()==0){//如果查询不到数据
-									out.println("数据错误！");
+									out.println("图书列表转化失败！");
 								}
 								else{
 									Set<String> ISBNSet=new TreeSet<>();
@@ -66,19 +107,17 @@
 													图书类别：<%=book.getBookType() %><br>
 													售价：<%=book.getBookSell() %>
 												</td>
-												<td>
-<!-- 													<form action=""> -->
-													<input type="hidden" name="ID" value="<%=book.getBookISBN() %>">
-													<a href="U_Car.jsp?ID=<%=book.getBookISBN() %>">加入购物车</a>
-<!-- 													这里做点了收藏不需要跳转，跳出来一个框提示收藏成功 -->
-													<form method="post">
+												<%
+												if(null==session.getAttribute("iden")||!("iden".equals(""+session.getAttribute("iden")))){
+													%>
+													<td>
+														<input type="hidden" name="ID" value="<%=book.getBookISBN() %>">
+														<a href="U_Car.jsp?ID=<%=book.getBookISBN() %>">加入购物车</a><br>
 														<a href="U_Star.jsp?ID=<%=book.getBookISBN() %>">收藏</a>
-													</form>
-<!-- 														<input type="submit" value="收藏" name="star"><br> -->
-<!-- 														<input type="submit" value="加入购物车" name="add"><br> -->
-<!-- 														<input type="submit" value="立即购买" name="buy"> -->
-<!-- 													</form> -->
-												</td>
+													</td>
+													<%
+												}
+												%>
 											</tr>
 										<%
 										}
@@ -86,7 +125,7 @@
 								}
 							}
 						%>
-					</table>
+					</table></div></form>
 		</div>
 	</div>
 	

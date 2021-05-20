@@ -46,6 +46,7 @@
 				float TotalPrice=Float.parseFloat(Price);
 				String OrderDay=helperClass.getDate();
 				
+// 				String newCarList="";
 // 				合并字符串
 				String BookList="";
 				for(int i=0;i<ISBN.length;i++){
@@ -57,7 +58,7 @@
 					}
 				}
 				
-				//修改书籍库信息,BookInfo要改，OrderInfo也要改
+				//修改书籍库信息，OrderInfo要改,购买后移除购物车
 // 				修改OrderInfo
 				String OrderSql="insert into OrderInfo (BookList,UserName,TotalPrice,OrderDay,Address,Phone) values('"+BookList+"','"+UserName+"',"+TotalPrice+",'"+OrderDay+"','"+Address+"','"+Phone+"')";
 				boolean Orderflag=helperClass.SQL_ZSG(OrderSql);
@@ -75,6 +76,17 @@
 						}
 						else{
 							out.println("原订单撤销失败！");
+						}
+					}
+					else{
+						//移除购物车
+						String deleCar="update UserInfo set UserBuyCar=null where UserName='"+UserName+"'";
+						boolean DeC=helperClass.SQL_ZSG(deleCar);
+						if(DeC){
+							out.print("清空购物车成功！");
+						}
+						else{
+							out.print("清空购物车失败！");
 						}
 					}
 					

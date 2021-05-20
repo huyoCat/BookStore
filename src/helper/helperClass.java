@@ -316,4 +316,15 @@ public class helperClass {
 		return result;
 	}
 	
+	
+	//添加或修改书籍类别时检测是否重名
+	public static boolean IsReName(String sql) {
+		List<Map<String, Object>> StarList=helperClass.SelectSQL(sql);
+		if(StarList.size()==0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 }

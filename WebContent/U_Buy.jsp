@@ -117,8 +117,9 @@
 
 			}
 			else{
+				out.println("购物车空空如也");
 				%>
-				<a href="U_Buy.jsp">数据出错，点击刷新</a>
+				<a href="Index.jsp">返回首页添加商品</a>
 				<%
 			}
 			

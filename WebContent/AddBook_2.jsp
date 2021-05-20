@@ -100,7 +100,7 @@
 				}
 				if(flag&&count==number){
 // 					这里根据ISBN计算一共有多少本，然后最后修改一下库存数量
-					String sqlCount="select BookISBN from BookInfo where BookISBN='"+BookISBN+"'";
+					String sqlCount="select BookISBN from BookInfo where IsSell=0 and BookISBN='"+BookISBN+"'";
 					List<Map<String, Object>> rsAmount=helperClass.SelectSQL(sqlCount);
 					int BookAmount=rsAmount.size();
 					//更新库存数据

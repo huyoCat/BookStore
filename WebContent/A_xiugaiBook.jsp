@@ -45,7 +45,7 @@
 							书籍作者：<input type="text" name="BookWriter" value="<%=book.getBookWriter() %>"><br>
 							出版社：<input type="text" name="BookPublisher" value="<%=book.getBookPublisher() %>"><br>
 							书籍简介：<textarea name="BookIntro"><%=book.getBookIntro() %></textarea><br>
-							书籍类别：<select name="TypeName">
+							书籍类别：<select name="BookType">
 										<%
 										String typeSql="select TypeName from BookType";
 										List<Map<String, Object>> rsType=helperClass.SelectSQL(typeSql);

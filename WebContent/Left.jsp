@@ -43,8 +43,8 @@
 			<table border="3px" align="center" cellspacing="10px">
 				<tr><th>书籍类别</th></tr>
 			<%
-				String sqlBType="select TypeName from BookType";
-				List<Map<String, Object>> rsBType=helperClass.SelectSQL(sqlBType);
+				String sqlBaType="select TypeName from BookType";
+				List<Map<String, Object>> rsBType=helperClass.SelectSQL(sqlBaType);
 				if(rsBType.size()==0){
 					out.println("数据错误！显示图书类别失败！");
 				}

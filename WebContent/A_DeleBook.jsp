@@ -46,7 +46,7 @@
 				}
 				else{
 					String limit=request.getParameter("limit").toString();
-					String search=helperClass.zhuanma(request.getParameter("search").toString());
+					String search=request.getParameter("search").toString();
 					SelectBookInfo+=" and "+limit+" like '%'+'"+search+"'+'%'";
 				}
 				

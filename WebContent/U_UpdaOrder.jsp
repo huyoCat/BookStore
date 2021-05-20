@@ -116,7 +116,7 @@
 										收货地址：<textarea name="address" ><%=order.getAddress() %></textarea>
 									</td>
 									<td>
-										总价=<input type="text" name="Tprice" id="Tprice" readOnly>
+										总价=<input type="text" name="Tprice" id="Tprice" value=<%=order.getTotalPrice() %> readOnly>
 									</td>
 								</tr>
 								

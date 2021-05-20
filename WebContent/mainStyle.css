@@ -13,7 +13,7 @@
 	margin-top:20px;
 	margin-left:250px;
 	background-color:#D5C4BC;
-	
+/* 	position:absolute; */
 	overflow-x: hidden;
     overflow-y: auto;
 /* 	overflow:hidden; */
@@ -30,4 +30,26 @@
 	
 	overflow-x: hidden;
     overflow-y: auto;
+}
+
+#InsideBar{
+/* 	vertical-align: middle; */
+	margin-top:20px;
+	margin-left:190px;
+}
+
+
+#addTypeLeft{
+	float:left;
+/* 	position:relative; */
+}
+
+#addTypeRight{
+	margin-left:500px;
+/* 	position:relative; */
+}
+
+#updaRight{
+	margin-top:100px;
+	margin-left:800px;
 }

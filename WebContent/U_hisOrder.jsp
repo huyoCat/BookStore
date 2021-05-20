@@ -37,20 +37,28 @@
 			else{//已登录
 				
 				String UserName=session.getAttribute("UserName").toString();
-				String SelectOrderInfo="select * from OrderInfo where CancelOrder=0 and UserName='"+UserName+"'";
+				String SelectOrderInfo="select * from OrderInfo where UserName='"+UserName+"'";
 				
 				//如果有搜索限制条件
 				if(!("null".equals(""+request.getParameter("limit")))){
-					if("CancelOrder".equals(request.getParameter("limit").toString())){
+					
+					if("CancelOrder".equals(""+request.getParameter("limit"))){
 						SelectOrderInfo="select * from OrderInfo where CancelOrder=1 and UserName='"+UserName+"'";
 					}
+					else if("CompOrder".equals(""+request.getParameter("limit"))){
+						SelectOrderInfo="select * from OrderInfo where Orderstate=1 and UserName='"+UserName+"'";
+					}
+					else if("NotyetOrder".equals(""+request.getParameter("limit"))){
+						SelectOrderInfo="select * from OrderInfo where Orderstate=0 and CancelOrder=0 and UserName='"+UserName+"'";
+					}
+					
 					//如果搜索框无数值
 					else if(null==request.getParameter("search")||"".equals(request.getParameter("search").toString())){
 						out.print("请输入搜索关键词");
 					}
 					else{
 						String limit=request.getParameter("limit").toString();
-						String search=helperClass.zhuanma(request.getParameter("search").toString());
+						String search=request.getParameter("search").toString();
 						SelectOrderInfo+=" and "+limit+" like '%'+'"+search+"'+'%'";
 					}
 					
@@ -80,8 +88,9 @@
 					<div>
 						<select name="limit">
 							<option value="null">选择搜索条件</option>
-							<option value="BookList">按书籍搜索</option>
-							<option value="Orderstate">按订单状态搜索</option>
+							<option value="OrderID">按订单编号搜索</option>
+							<option value="NotyetOrder">查看未发货订单</option>
+							<option value="CompOrder">查看已完成订单</option>
 							<option value="CancelOrder">查看已取消订单</option>
 						</select>
 								
@@ -133,25 +142,28 @@
 											</td>
 											
 											<td>
-												<%if(order.getOrderstate()==0){
-													state="尚未发货";
-												}
-												else{
-													state="订单完成";
-												}
-												
-												if(order.getCancelOrder()==0){
-													%>
-													目前状态：<%=state %><br>
-													<a href="U_UpdaOrder.jsp?OrderID=<%=order.getOrderID() %>">修改订单</a><br>
-													<a href="#" onClick="OrderUpda(<%=order.getOrderID() %>)">取消购买</a>
-													<%
-												}
-												else{
+												<%
+												if(order.getCancelOrder()==1){
 													%>
 													目前状态：已取消<Br>
 													<a href="U_UpdaOrder.jsp?OrderID=<%=order.getOrderID() %>">重新购买</a>
 													<%
+												}
+												else{
+													if(order.getOrderstate()==0){
+														state="尚未发货";
+														%>
+														目前状态：<%=state %><br>
+														<a href="U_UpdaOrder.jsp?OrderID=<%=order.getOrderID() %>">修改订单</a><br>
+														<a href="#" onClick="OrderUpda(<%=order.getOrderID() %>)">取消购买</a>
+														<%
+													}
+													else{
+														state="订单完成";
+														%>
+														目前状态：<%=state %><br>
+														<%
+													}
 												}
 												%>
 												
