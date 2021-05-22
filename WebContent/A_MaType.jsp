@@ -23,6 +23,21 @@
 	<div id="main">
 <!-- 	左边 -->
 		<%@ include file="Left.jsp"%>
+		<form action="" method="post" id="InsideBar">
+			<div>
+	<!-- 			左边显示目前拥有的类别 -->
+				<select name="limit" id="insideChild">
+					<option value="null">选择搜索条件</option>
+					<option value="TypeName">按类别名称搜索</option>
+					<option value="TypeID">按类别编号搜索</option>
+				</select>
+										
+				<input type="text" name="search">&nbsp;&nbsp;
+				<input type="submit" value="搜索">
+				
+			</div>
+		</form>
+		
 <!-- 	中间的图书列表 -->
 		<div id="bookTable">
 		<%
@@ -105,20 +120,7 @@
 		
 			%>
 
-			<form method="post" id="InsideBar">
-			
-				<div>
-	<!-- 			左边显示目前拥有的类别 -->
-					<select name="limit">
-						<option value="null">选择搜索条件</option>
-						<option value="TypeName">按类别名称搜索</option>
-						<option value="TypeID">按类别编号搜索</option>
-					</select>
-										
-					<input type="text" name="search">&nbsp;&nbsp;
-					<input type="submit" value="搜索">
-				
-				</div><br><br>
+			<form method="post">
 				
 				<div id="addTypeLeft">
 					<table border="3px" align="center" cellspacing="10px">
@@ -136,9 +138,9 @@
 							for(Map<String, Object> map:TypeList){
 								%>
 								<tr>
-									<td><%=map.get("TypeID") %></td>
-									<td><%=map.get("TypeName") %></td>
-									<td><a href="#" onClick="Deleting(<%=map.get("TypeID") %>)">删除</a><br>
+									<td align="center"><%=map.get("TypeID") %></td>
+									<td align="center"><%=map.get("TypeName") %></td>
+									<td align="center"><a href="#" onClick="Deleting(<%=map.get("TypeID") %>)">删除</a><br>
 										<a href="A_MaType2.jsp?msg=updateType&TypeID=<%=map.get("TypeID") %>">修改</a>
 									</td>
 								</tr>

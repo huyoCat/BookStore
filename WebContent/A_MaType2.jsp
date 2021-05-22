@@ -31,7 +31,7 @@
 					TypeName=""+List.get(0).get("TypeName");
 				}
 				%>
-				<div>
+				<div id="person">
 					<form method="post">
 						<input type="hidden" name="BeTypeName" value="<%=TypeName %>">
 						ÐÞ¸ÄÎª£º<input type="text" name="nowName">

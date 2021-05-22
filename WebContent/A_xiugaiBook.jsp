@@ -37,14 +37,12 @@
 					else{
 						Book book=bookList.get(0);
 						%>
-						<div>
+						<div id="updateBook">
 <!-- 						最开始的ISBN也存起来传过去 -->
 							<input type="hidden" name="BeISBN" value="<%=BookISBN %>">
-							书籍编号：<input type="text" name="BookISBN" value="<%=book.getBookISBN() %>"><br>
-							书籍名称：<input type="text" name="BookName" value="<%=book.getBookName() %>"><br>
-							书籍作者：<input type="text" name="BookWriter" value="<%=book.getBookWriter() %>"><br>
-							出版社：<input type="text" name="BookPublisher" value="<%=book.getBookPublisher() %>"><br>
-							书籍简介：<textarea name="BookIntro"><%=book.getBookIntro() %></textarea><br>
+							书籍编号：<input type="text" name="BookISBN" value="<%=book.getBookISBN() %>">
+							书籍名称：<input type="text" name="BookName" value="<%=book.getBookName() %>">
+							书籍作者：<input type="text" name="BookWriter" value="<%=book.getBookWriter() %>">
 							书籍类别：<select name="BookType">
 										<%
 										String typeSql="select TypeName from BookType";
@@ -57,7 +55,15 @@
 											}
 											%>
 								</select><br>
-							书籍图片：<br><%
+							出版社：<input type="text" name="BookPublisher" value="<%=book.getBookPublisher() %>">
+							
+							书籍售价：<input type="text" name="BookSell" value="<%=book.getBookSell() %>">
+							库存数量：<input type="text" name="BookCount" value="<%=book.getBookCount() %>"><br>
+							
+							书籍简介：<textarea name="BookIntro" cols="50" rows="10"><%=book.getBookIntro() %></textarea>
+<!-- 							<textarea rows="" cols=""></textarea> -->
+							
+								书籍图片：<%
 									if(book.getBookPic().equals("picture/")){
 									out.print("暂无图片");
 									}
@@ -70,8 +76,7 @@
 									<input type="hidden" name="BePic" value="<%=book.getBookPic() %>">
 							<input type="file" name="file" value="<%=book.getBookPic() %>"><br>
 							
-							书籍售价：<input type="text" name="BookSell" value="<%=book.getBookSell() %>"><br>
-							库存数量：<input type="text" name="BookCount" value="<%=book.getBookCount() %>"><br>
+					
 							
 							<input type="submit" value="确认修改">&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="reset" value="清空">

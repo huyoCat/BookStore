@@ -53,11 +53,14 @@
 				
 				%>
 				<form method="post" action="U_Confirmorder.jsp?msg=updateOrder&OrderID=<%=OrderID %>">
-					<table border="3px" align="center" cellspacing="10px">
+					<table align="center">
 						<tr>
 							<th>书籍图片</th>
 							<th>书籍信息</th>
 							<th>修改</th>
+						</tr>
+						<tr>
+							<td colspan="4"><hr width="100%" color="black"></td>
 						</tr>
 						<%
 // 						根据订单查询购书信息
@@ -86,7 +89,7 @@
 									int BuyNumber=book_number.getNumber();
 									%>
 									<tr>
-										<td><%
+										<td align="center"><%
 												if(book.getBookPic().equals("picture/")){
 													out.print("暂无图片");
 												}
@@ -98,12 +101,15 @@
 												%></td>
 										<td>
 											书名：<input type="text" value="<%=book.getBookName() %>" readOnly><br>
-											ISBN:<input type="text" name="ISBN" value="<%=book.getBookISBN() %>" readOnly><br>
+											ISBN：<input type="text" name="ISBN" value="<%=book.getBookISBN() %>" readOnly><br>
 											单价：<input type="text" name="Cost" value="<%=book.getBookSell() %>" readOnly><br>
 										</td>
 										<td>
 										 	购买数量：<input type="text" name="number" value="<%=BuyNumber %>" OnInput="getNum()">
 										</td>
+									</tr>
+									<tr>
+										<td colspan="4"><hr width="100%" color="black"></td>
 									</tr>
 									<%
 // 									int n=request.getParameter("number");
@@ -111,7 +117,7 @@
 								}
 								%>
 								<tr>
-									<td>
+									<td colspan="2">
 										联系方式：<input type="text" name="phone" value=<%=order.getPhone() %>><br>
 										收货地址：<textarea name="address" ><%=order.getAddress() %></textarea>
 									</td>
@@ -121,7 +127,7 @@
 								</tr>
 								
 								<tr>
-									<td>
+									<td colspan="3" align="center">
 										<input type="submit" value="提交订单">
 									</td>
 								</tr>

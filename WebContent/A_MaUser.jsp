@@ -30,6 +30,18 @@
 	<div id="main">
 <!-- 	左边 -->
 		<%@ include file="Left.jsp"%>
+		<form action="" method="post" id="InsideBar">
+			<div>
+				<select name="limit" id="insideChild">
+					<option value="null">选择搜索条件</option>
+					<option value="UserName">根据用户名搜索</option>
+					<option value="UserGrant">查看已拉黑用户</option>
+				</select>
+										
+				<input type="text" name="search">&nbsp;&nbsp;
+				<input type="submit" value="搜索">
+			</div>
+		</form>
 <!-- 	中间的图书列表 -->
 		<div id="bookTable">
 <!-- 			检测是否登录并且是不是管理员 -->
@@ -93,17 +105,6 @@
 					
 					%>
 					<form action="" method="post">
-					
-						<div>
-							<select name="limit">
-								<option value="null">选择搜索条件</option>
-								<option value="UserName">根据用户名搜索</option>
-								<option value="UserGrant">查看已拉黑用户</option>
-							</select>
-										
-							<input type="text" name="search">&nbsp;&nbsp;
-							<input type="submit" value="搜索">
-						</div>
 						
 						<div>
 							<table border="3px" align="center" cellspacing="10px">

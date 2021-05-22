@@ -31,7 +31,7 @@
 			String UserName=session.getAttribute("UserName").toString();
 		
 			%>
-			<form action="AddBook_2.jsp" method="post">
+			<form action="AddBook_2.jsp" method="post" id="ABook">
 				请输入书籍信息：<br><br>
 				书籍名称：<input type="text" name="BookName">&nbsp;&nbsp;
 				图书ISBN：<input type="text" name="BookISBN"><br><br>

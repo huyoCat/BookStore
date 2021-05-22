@@ -16,48 +16,31 @@
 		if(null!=session.getAttribute("UserName")){
 			if(null!=session.getAttribute("iden")&&("iden".equals(""+session.getAttribute("iden")))){//是管理员
 				%>
-				<table>
-				<tr><td><a href="Index.jsp">网站首页</a></td></tr>
-				<tr><td><a href="AddBook.jsp">添加书籍</a></td></tr>
-				<tr><td><a href="A_DeleBook.jsp">删除/修改书籍信息</a></td></tr>
-				<tr><td><a href="A_MaType.jsp">管理书籍类别</a></td></tr>
-				<tr><td><a href="A_MaUser.jsp">管理用户</a></td></tr>
-				<tr><td><a href="A_MaOrder.jsp">管理订单</a></td></tr>
+				<table id="LtABLE" cellspacing="15">
+				<tr><td id="left_User">><a href="Index.jsp">网站首页</a></td></tr>
+				<tr><td id="left_User">><a href="AddBook.jsp">添加书籍</a></td></tr>
+				<tr><td id="left_User">><a href="A_DeleBook.jsp">删除/修改书籍信息</a></td></tr>
+				<tr><td id="left_User">><a href="A_MaType.jsp">管理书籍类别</a></td></tr>
+				<tr><td id="left_User">><a href="A_MaUser.jsp">管理用户</a></td></tr>
+				<tr><td id="left_User">><a href="A_MaOrder.jsp">管理订单</a></td></tr>
 				</table>
 				<%
 			}
 			else{
 				%>
-				<table>
-				<tr><td><a href="Index.jsp">网站首页</a></td></tr>
-				<tr><td><a href="U_Star.jsp">收藏夹</a></td></tr>
-				<tr><td><a href="U_Car.jsp">购物车</a></td></tr>
-				<tr><td><a href="U_hisOrder.jsp">历史订单</a></td></tr>
-				<tr><td><a href="U_UpdateMsg.jsp">修改个人信息</a></td></tr>
+				<table id="LtABLE" cellspacing="15">
+				<tr><td id="left_User"><a href="Index.jsp">网站首页</a></td></tr>
+				<tr><td id="left_User"><a href="U_Star.jsp">收藏夹</a></td></tr>
+				<tr><td id="left_User"><a href="U_Car.jsp">购物车</a></td></tr>
+				<tr><td id="left_User"><a href="U_hisOrder.jsp">历史订单</a></td></tr>
+				<tr><td id="left_User"><a href="U_UpdateMsg.jsp">修改个人信息</a></td></tr>
 				</table>
 				<%
 			}
 		}
 		else{
 			%>
-			<table border="3px" align="center" cellspacing="10px">
-				<tr><th>书籍类别</th></tr>
-			<%
-				String sqlBaType="select TypeName from BookType";
-				List<Map<String, Object>> rsBType=helperClass.SelectSQL(sqlBaType);
-				if(rsBType.size()==0){
-					out.println("数据错误！显示图书类别失败！");
-				}
-				else{
-					for(Map<String, Object> item:rsBType){
-						%>
-						<tr><td><%=""+item.get("TypeName") %></td></tr>
-						<%
-					}
-					
-				}
-			%>
-			</table>
+			<img src="picture/welcome.png" id="leftPic">
 			<%
 		}
 		%>

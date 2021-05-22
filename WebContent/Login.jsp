@@ -30,7 +30,7 @@
 <!-- 	左边 -->
 		<%@ include file="Left.jsp"%>
 		<div id="AddBook">
-			<form method="post" onSubmit="return check();">
+			<form method="post" onSubmit="return check();" id="LoginAnd">
 				<!-- 登录页面 -->
 <!-- 		<img src="picture/Login.png" height="30"> -->
 				账号：&nbsp;<input type="text" name="userName" id="name"><br><br>
@@ -52,7 +52,12 @@
 						String sql1="select * from ADInfo where ADName='"+UserName+"'";
 						List<Map<String, Object>> rs1=helperClass.SelectSQL(sql1);
 						if(rs1.size()==0){//如果查询不到数据
-							out.println("该管理员不存在！");
+// 							out.println("该管理员不存在！");
+							%>
+							<script type="text/javascript">
+								alert('该管理员不存在！');
+							</script>
+							<%
 						}
 						else{
 							for(Map<String, Object> item:rs1){
@@ -65,7 +70,12 @@
 //	 								out.println("欢迎登录！"+UserName+"！");
 								}
 								else{
-									out.println("密码错误，请重新输入密码。");
+									%>
+									<script type="text/javascript">
+										alert('密码错误，请重新输入密码！');
+									</script>
+									<%
+// 									out.println("密码错误，请重新输入密码。");
 								}
 							}
 						}
@@ -79,7 +89,12 @@
 						List<Map<String, Object>> rs1=helperClass.SelectSQL(sql1);
 						
 						if(rs1.size()==0){//如果查询不到数据
-							out.println("该用户不存在！");
+// 							out.println("该用户不存在！");
+							%>
+							<script type="text/javascript">
+								alert('该用户不存在！');
+							</script>
+							<%
 						}
 						else{
 							for(Map<String, Object> item:rs1){
@@ -91,7 +106,12 @@
 //	 								out.println("欢迎登录！"+UserName+"！");
 								}
 								else{
-									out.println("密码错误，请重新输入密码。");
+									%>
+									<script type="text/javascript">
+										alert('密码错误，请重新输入密码！');
+									</script>
+									<%
+// 									out.println("密码错误，请重新输入密码。");
 								}
 							}
 						}

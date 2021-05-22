@@ -19,8 +19,11 @@
 		<%
 		if(null==session.getAttribute("UserName")
 		||("".equals(session.getAttribute("UserName").toString()))){
-			out.println("请先登录网站！");
+// 			out.println("请先登录网站！");
 			%>
+			<script type="text/javascript">
+				alert('请先登录网站！');
+			</script>
 			<br><a href="Login.jsp">登录</a><br>
 			<a href="Register.jsp">注册</a>
 			<%
@@ -36,7 +39,12 @@
 				String SelectStar="select UserStar from UserInfo where UserName='"+UserName+"'";
 				List<Map<String, Object>> StarList=helperClass.SelectSQL(SelectStar);
 				if(StarList.size()==0){
-					out.print("取消收藏的查询结果集失败！");
+					%>
+					<script type="text/javascript">
+						alert('取消收藏的查询结果集失败');
+					</script>
+					<%
+// 					out.print("取消收藏的查询结果集失败！");
 					%>
 					<a href="Index.jsp">返回首页</a>
 					<%
@@ -51,21 +59,24 @@
 						}
 						NowInter+=strArr[i]+",";
 					}
-					if(NowInter.charAt(NowInter.length()-1)==','){
+					if(NowInter.length()>0&&NowInter.charAt(NowInter.length()-1)==','){
 						NowInter=NowInter.substring(0, NowInter.length()-1);
 					}
 					String InserSQL="update UserInfo set UserStar='"+NowInter+"' where UserName='"+UserName+"'";
 					boolean flag=helperClass.SQL_ZSG(InserSQL);
 					if(flag){
-						out.print("取消收藏成功！");
+// 						out.print("取消收藏成功！");
 						%>
-						<a href="Index.jsp">返回首页</a>
+						<script type="text/javascript">
+							alert('取消收藏成功！');
+						</script>
+<!-- 						<a href="Index.jsp">取消收藏成功，返回首页</a> -->
 						<%
 					}
 					else{
-						out.print("取消收藏失败！");
+// 						out.print("取消收藏失败！");
 						%>
-						<a href="U_Star.jsp">点击刷新</a>
+						<a href="U_Star.jsp">取消收藏失败，点击刷新</a>
 						<%
 					}
 				}
@@ -80,7 +91,12 @@
 				
 				List<Map<String, Object>> StarList=helperClass.SelectSQL(SelectStar);
 				if(StarList.size()==0){
-					out.print("查询结果集失败！");
+					%>
+					<script type="text/javascript">
+						alert('查询结果集失败！');
+					</script>
+					<%
+// 					out.print("查询结果集失败！");
 					%>
 					<a href="Index.jsp">返回首页</a>
 					<%
@@ -145,11 +161,14 @@
 			
 		%>
 			<!-- 			直接点击查看收藏夹 -->
-		<table border="3px" align="center" cellspacing="10px">
+		<table >
 			<tr>
 				<th width="150px">图片</th>
 				<th width="200px">详情</th>
 				<th width="150px"></th>
+			</tr>
+			<tr>
+				<td colspan="4"><hr width="100%" color="black"></td>
 			</tr>
 			<%
 			
@@ -202,13 +221,16 @@
 										售价：<%=book.getBookSell() %>
 									</td>
 									
-									<td>
-									<a>加入购物车</a><br>
+									<td align="center">
+									<a href="U_Car.jsp?ID=<%=book.getBookISBN() %>">加入购物车</a><br>
 									<form action="" method="post">
 										<a href="U_Star.jsp?StarID=<%=book.getBookISBN() %>">取消收藏</a>
 									</form>
 									</td>
 									
+								</tr>
+								<tr>
+									<td colspan="4"><hr width="100%" color="black"></td>
 								</tr>
 								<%
 							}

@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
 #header{
-	background-color: #D5C4BC;
+/* 	background-color:#b7472a; */
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#b8c4cb), to(#f1f6f9));/*谷歌*/ 
 	height:150px;
 	width:100%;
 }
@@ -17,6 +18,7 @@
 	margin-left:50%;
 	margin-top:65px;
 	float:left;
+	background-color:#ffffff;
 	position:relative;
 }
 
@@ -30,13 +32,17 @@
 }
 #loginLogo2{
 /* 	background-color:#ffffff; */
-	height:30px;
+	height:70px;
 	width:200px;
 	float:right;
 	position:relative;
 	margin-right:4%;
-	margin-top:30px;
+	margin-top:40px;
+	text-align: center;
+	border-radius: 10px;
+/* 	background-color:#ffffff; */
 }
+
 
 #body{
 	background-color:#ffffff;

@@ -112,7 +112,7 @@
 					
 					
 					<tr>
-					<td><input type="submit" value="提交订单">&nbsp;&nbsp;&nbsp;&nbsp;
+					<td align="center"><input type="submit" value="提交订单">&nbsp;&nbsp;&nbsp;&nbsp;
 						<a href="javascript:history.back(-1)">返回修改</a>
 					</td>
 					</tr>

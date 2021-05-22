@@ -120,10 +120,11 @@
 					//如果是修改密码请求
 					if("Pwd".equals(""+request.getParameter("msg"))){
 						%>
-						<form action="" method="post" onSubmit="return Check()">
-							请输入原密码：<input type="password" name="BePwd" id="BePwd"><br>
-							修改后的密码：<input type="password" name="NowPwd" id="NowPwd"><br>
-							请确认密码：<input type="password" name="concernPwd" id="concernPwd"><br>
+						<form id="person" method="post" onSubmit="return Check()">
+						<br><br>
+							请输入原密码：<input type="password" name="BePwd" id="BePwd"><br><br>
+							修改后的密码：<input type="password" name="NowPwd" id="NowPwd"><br><br>
+							请确认密码：<input type="password" name="concernPwd" id="concernPwd"><br><br>
 							<input type="submit" value="确定"  name="updatePwd">
 						</form>
 						<%
@@ -133,7 +134,7 @@
 					//如果是修改地址请求
 					if("Address".equals(""+request.getParameter("msg"))){
 						%>
-						<form action="" method="post">
+						<form id="person" method="post"><br><br>
 							请输入收货地址：<textarea name="Address" rows="" cols=""></textarea>
 							<input type="submit" value="确定"  name="updateAddress">
 						</form>
@@ -144,7 +145,7 @@
 					//如果是修改联系方式请求
 					if("Phone".equals(""+request.getParameter("msg"))){
 						%>
-						<form action="" method="post">
+						<form id="person" method="post"><br><br>
 							请输入联系方式：<input type="text" name="Phone">
 							<input type="submit" value="确定" name="updatePhone">
 						</form>

@@ -30,7 +30,7 @@
 <!-- 	搜索框 -->
 		<div id="titleBt">
 <!-- 			<form action=""> -->
-<!-- 				<input type="text" id="searchBox"> -->
+<!-- 			<label></label> -->
 <!-- 				<input type="button" id="searchButton" value="search"> -->
 <!-- 			</form> -->
 		</div>
@@ -40,9 +40,12 @@
 			if(null!=session.getAttribute("UserName")
 				&&!("".equals(session.getAttribute("UserName").toString()))){
 				%>
-					<a id="loginLogo2" href="U_Area.jsp">
-					<%=session.getAttribute("UserName").toString() %>的个人中心</a>
-					<a id="loginLogo2" href="#" onClick="Logout()">退出登录</a>
+					<div id="loginLogo2">
+					<label><%=session.getAttribute("UserName").toString() %>，欢迎您！</label>
+					<br><br>
+					<a href="#" onClick="Logout()">退出登录</a>
+					</div>
+					
 				<%
 			}
 			else{

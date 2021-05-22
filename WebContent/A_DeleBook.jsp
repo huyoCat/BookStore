@@ -8,6 +8,7 @@
 	<link type="text/css" rel="stylesheet" href="mainStyle.css"/>
 	<script type="text/javascript">
 		function Deleting(ISBN){
+// 			alert("1");
 			var BookISBN=ISBN;
 			var flag=confirm("确认删除书籍？");
 			if(flag){
@@ -22,8 +23,24 @@
 	<div id="main">
 <!-- 	左边 -->
 		<%@ include file="Left.jsp"%>
+		<form action="" method="post">
+		<div id="InsideBar">
+<!-- 					搜索条件 -->
+			<select name="limit" id="insideChild">
+				<option value="null">选择搜索条件</option>
+				<option value="BookISBN">按书籍编号搜索</option>
+				<option value="BookName">按书籍名称搜索</option>
+				<option value="BookType">按书籍类别搜索</option>
+				<option value="BookWriter">按书籍作者搜索</option>
+			</select>
+				
+			<input type="text" name="search">&nbsp;&nbsp;
+			<input type="submit" value="搜索">
+		</div>
+		</form>
 <!-- 	中间的图书列表 -->
 		<div id="bookTable">
+		
 		<!-- 	检测是否登录 -->
 		<%
 		if(null==session.getAttribute("UserName")
@@ -71,25 +88,15 @@
 			//什么都没有的时候显示书籍列表
 			%>
 			<form method="post">
-				<div>
-<!-- 					搜索条件 -->
-					<select name="limit">
-						<option value="null">选择搜索条件</option>
-						<option value="BookISBN">按书籍编号搜索</option>
-						<option value="BookName">按书籍名称搜索</option>
-						<option value="BookType">按书籍类别搜索</option>
-						<option value="BookWriter">按书籍作者搜索</option>
-					</select>
-					
-					<input type="text" name="search">&nbsp;&nbsp;
-					<input type="submit" value="搜索">
-				</div>
 				
-				<table border="3px" align="center" cellspacing="10px">
+				<table>
 					<tr>
 						<th width="150px">图片</th>
 						<th width="300px">书籍信息</th>
 						<th width="150px">操作</th>
+					</tr>
+					<tr>
+						<td colspan="4"><hr width="100%" color="black"></td>
 					</tr>
 					
 					<%
@@ -134,12 +141,15 @@
 										库存数量：<%=book.getBookCount() %><br>
 										</td>
 										
-										<td>
+										<td align="center">
 											<a href="A_xiugaiBook.jsp?ISBN=<%=book.getBookISBN() %>">修改信息</a><br>
 											
 											<a href="#" onClick="Deleting(<%=book.getBookISBN() %>)">删除书籍</a>
 										</td>
 									
+									</tr>
+									<tr>
+										<td colspan="4"><hr width="100%" color="black"></td>
 									</tr>
 									<%
 								}

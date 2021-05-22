@@ -29,12 +29,12 @@
 <!-- 	左边 -->
 		<%@ include file="Left.jsp"%>
 		<div id="AddBook">
-			<form action="" method="post" onSubmit="return check();">
+			<form method="post" onSubmit="return check();" id="LoginAnd">
 				账号：&nbsp;<input type="text" name="userName"><br><br>
 				密码：&nbsp;<input type="password" name="password"><br><br>
 <!-- 				是否管理员：<input type="radio" value="AD" name="iden">&nbsp;&nbsp; -->
-				<input type="submit" value="注册">&nbsp;&nbsp;
-				<input type="reset" value="清空">
+				<input type="submit" value="注册"  id="LoginLChild">
+				<input type="reset" value="清空" id="LoginRChild">
 			</form>
 			<%
 // 				String iden = request.getParameter("iden");
@@ -48,7 +48,12 @@
 
 					boolean flagCON=helperClass.isContainChinese(UserName);
 					if(flagCON){
-						out.print("请输入非中文字符");
+						%>
+						<script type="text/javascript">
+							alert('请输入非中文字符！');
+						</script>
+						<%
+// 						out.print("请输入非中文字符");
 					}
 					else{
 // 						判断是否重名
@@ -56,7 +61,12 @@
 						List<Map<String, Object>> StarList=helperClass.SelectSQL(chekcSql);
 						for(Map<String, Object> map:StarList){
 							if(UserName.equals(map.get("UserName"))){
-								out.println("注册失败！用户名已存在！");
+								%>
+								<script type="text/javascript">
+									alert('注册失败！用户名已存在！');
+								</script>
+								<%
+// 								out.println("注册失败！用户名已存在！");
 								return;
 							}
 						}
@@ -76,11 +86,16 @@
 							session.setAttribute("UserName", UserName);
 							session.setAttribute("UserPwd", UserPwd);
 							%>
-							<a href="Login.jsp">注册成功！去登录</a>
+							<a href="Login.jsp" id="juzhong">注册成功！去登录</a>
 							<%
 						}
 						else{
-							out.println("注册失败，请重新注册");
+							%>
+							<script type="text/javascript">
+								alert('注册失败，请重新注册！');
+							</script>
+							<%
+// 							out.println("注册失败，请重新注册");
 						}
 					}
 					

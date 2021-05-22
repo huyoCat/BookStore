@@ -6,13 +6,19 @@
 /* 	background-color:#D5C4BC; */
 }
 
+#juzhong{
+	margin-left:420px;
+}
+
+
 #bookTable{
 /* 	margin-top:20px; */
-	height:450px;
+	height:380px;
 	width:1080px;
-	margin-top:20px;
+	margin-top:30px;
 	margin-left:250px;
-	background-color:#D5C4BC;
+/* 	text-align: center; */
+/* 	background-color:#a0937d; */
 /* 	position:absolute; */
 	overflow-x: hidden;
     overflow-y: auto;
@@ -26,30 +32,111 @@
 	width:1080px;
 	margin-top:20px;
 	margin-left:250px;
-	background-color:#D5C4BC;
-	
+/* 	background-color:#000000; */
+/* 	text-align: center; */
 	overflow-x: hidden;
     overflow-y: auto;
 }
 
+
+#person{
+	text-align: center;
+	width:800px;
+	height:300px;
+	margin-top:60px;
+	margin-left:100px;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#f1f6f9), to(#b8c4cb));
+}
+
+#ABook{
+/* 	text-align: center; */
+	width:800px;
+	height:350px;
+	margin-top:60px;
+	margin-left:100px;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#f1f6f9), to(#b8c4cb));
+}
+
+#updateBook{
+	text-align: center;
+/* 	width:800px; */
+/* 	height:400px; */
+	margin-top:60px;
+	margin-left:50px;
+	background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#f1f6f9), to(#b8c4cb));
+}
+
+
+#LoginAnd{
+	width:250px;
+	height:150px;
+	margin-top:100px;
+	margin-left:350px;
+/* 	background-color:#889e81; */
+}
+#LoginLChild{
+/* 	float:right; */
+	margin-left:50px;
+}
+
+#LoginRChild{
+	float:right;
+	margin-right:50px;
+}
+
+
 #InsideBar{
 /* 	vertical-align: middle; */
-	margin-top:20px;
-	margin-left:190px;
+	margin-top:30px;
+	margin-left:610px;
+	background-color:#758184;
+	width:370px;
+	height:35px;
+	border-radius: 10px;
+	text-align: center;
+}
+
+#insideChild{
+	margin-top:8px;
+/* 	text-align: center; */
 }
 
 
 #addTypeLeft{
 	float:left;
+	margin-left:150px;
 /* 	position:relative; */
 }
 
 #addTypeRight{
-	margin-left:500px;
+	margin-left:600px;
+/* 	margin-top:100px; */
 /* 	position:relative; */
 }
 
 #updaRight{
 	margin-top:100px;
 	margin-left:800px;
+}
+
+table{
+	background-color:#f1f6f9;
+/* 	border-Color:#000000; */
+	align:center;
+/* 	border:30; */
+	border:20;
+	cellspacing:50;
+	border-radius: 10px;
+}
+
+body{
+	background-color:#f1f6f9;
+}
+
+#top{
+	margin-top:20px;
+}
+
+a{
+	align:center;
 }

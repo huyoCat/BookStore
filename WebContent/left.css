@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #Left{
-	background-color: #D5C4BC;
+/* 	background-color: #1e2022; */
 /* 	margin-top:160px; */
 	height:450px;
 	width:180px;
@@ -11,6 +11,31 @@
 	margin-top:20px;
 	overflow-x: hidden;
     overflow-y: auto;
+    border-radius: 10px;
+}
+
+#leftPic{
+	width:75px;
+	margin-left:30px;
+}
+
+#LtABLE{
+	text-align: center;
+	margin-left:15px;
+	margin-top:60px;
+/* 	cellspacing:30; */
+/* 	borderC30; */
+}
+
+#left_User{
+	text-align: center;
+	margin-left:100px;
+	margin-top:200px;
+	height:40px;
+	width:130px;
+	border-radius: 10px;
+	background-color:#b8c4cb;
+/* 	padding:9px; */
 }
 
 #tag{

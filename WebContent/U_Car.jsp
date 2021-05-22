@@ -143,7 +143,7 @@
 			//没有任何参数的情况下直接加载购物车
 			%>
 			<form method="post" action="U_Buy.jsp">
-			<table border="3px" align="center" cellspacing="10px">
+			<table>
 			
 				<tr>
 					<th width="150px">图片</th>
@@ -151,7 +151,9 @@
 					<th width="150px">购买数量</th>
 					<th width="150px"><input type="submit" value="全部购买"></th>
 				</tr>
-			
+				<tr>
+					<td colspan="4"><hr width="100%" color="black"></td>
+				</tr>
 			
 				<!-- 				读取数据循环显示 -->
 				<%
@@ -205,16 +207,19 @@
 										售价：<%=book.getBookSell() %>
 										</td>
 										
-										<td>
+										<td align="center">
 											<input type="hidden" value='<%=book.getBookISBN() %>' name="BuyISBN">
-											请输入购买数量：<input type="text" name="number" value="1">
+											请输入购买数量：<input type="text" name="number" value="1" size="5px">
 											
 										</td>
 										
-										<td>
+										<td align="center">
 										<a href="U_Car.jsp?DeleID=<%=book.getBookISBN() %>">移除商品</a>
 										</td>
 									
+									</tr>
+									<tr>
+										<td colspan="4"><hr width="100%" color="black"></td>
 									</tr>
 									<%
 								}

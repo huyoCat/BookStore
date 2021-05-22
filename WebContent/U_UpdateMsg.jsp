@@ -41,26 +41,37 @@
 						User user=UserList.get(0);
 						%>
 						<div>
-							<table border="3px" align="center" cellspacing="10px">
+							<table id="person">
 								<tr>
-									<th>我的信息</th>
-									<th></th>
+									<th colspan="2">我的信息</th>
+								</tr>
+								<tr>
+									<td colspan="4"><hr width="100%" color="black"></td>
 								</tr>
 								<tr>
 									<td>用户名：<%=user.getUserName() %></td>
 									<td>用户名禁止修改</td>
 								</tr>
 								<tr>
+									<td colspan="4"><hr width="100%" color="black"></td>
+								</tr>
+								<tr>
 									<td>用户密码：不可见</td>
-									<td><a href="U_UpdateMsg2.jsp?msg=Pwd">修改</a></td>
+									<td align="center"><a href="U_UpdateMsg2.jsp?msg=Pwd">修改</a></td>
+								</tr>
+								<tr>
+									<td colspan="4"><hr width="100%" color="black"></td>
 								</tr>
 								<tr>
 									<td>收货地址：<%=user.getUserAddress() %></td>
-									<td><a href="U_UpdateMsg2.jsp?msg=Address">修改</a></td>
+									<td align="center"><a href="U_UpdateMsg2.jsp?msg=Address">修改</a></td>
+								</tr>
+								<tr>
+									<td colspan="4"><hr width="100%" color="black"></td>
 								</tr>
 								<tr>
 									<td>联系电话：<%=user.getUserPhone() %></td>
-									<td><a href="U_UpdateMsg2.jsp?msg=Phone">修改</a></td>
+									<td align="center"><a href="U_UpdateMsg2.jsp?msg=Phone">修改</a></td>
 								</tr>
 							</table>
 						</div>

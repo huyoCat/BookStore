@@ -22,6 +22,21 @@
 	<div id="main">
 <!-- 	左边 -->
 		<%@ include file="Left.jsp"%>
+											<!-- 		一个搜索框 -->
+				<form method="post">
+				<div id="InsideBar">
+					<select name="limit" id="insideChild">
+						<option value="null">选择搜索条件</option>
+						<option value="OrderID">按订单编号搜索</option>
+						<option value="NotyetOrder">查看未发货订单</option>
+						<option value="CompOrder">查看已完成订单</option>
+						<option value="CancelOrder">查看已取消订单</option>
+					</select>
+							
+					<input type="text" name="search">&nbsp;&nbsp;
+					<input type="submit" value="搜索">
+				</div>
+				</form>
 <!-- 	中间的图书列表 -->
 		<div id="bookTable">
 		
@@ -83,21 +98,7 @@
 				
 				%>
 				<!-- 		如果订单还没有确认用户可以删除订单 -->
-				<form action="" method="post">
-					<!-- 		一个搜索框 -->
-					<div>
-						<select name="limit">
-							<option value="null">选择搜索条件</option>
-							<option value="OrderID">按订单编号搜索</option>
-							<option value="NotyetOrder">查看未发货订单</option>
-							<option value="CompOrder">查看已完成订单</option>
-							<option value="CancelOrder">查看已取消订单</option>
-						</select>
-								
-						<input type="text" name="search">&nbsp;&nbsp;
-						<input type="submit" value="搜索">
-					</div>
-				
+				<form method="post">
 			<!-- 		一个订单列表 -->
 					<div>
 						<table border="3px" align="center" cellspacing="10px">
@@ -124,7 +125,7 @@
 										String state="";
 										%>
 										<tr>
-											<td><%=order.getOrderID() %><br></td>
+											<td align="center"><%=order.getOrderID() %><br></td>
 											
 											<td>
 											购买图书：<BR><BR>
@@ -141,7 +142,7 @@
 											联系方式：<%=order.getPhone() %><br>
 											</td>
 											
-											<td>
+											<td align="center">
 												<%
 												if(order.getCancelOrder()==1){
 													%>

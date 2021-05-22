@@ -17,8 +17,27 @@
 	<div id="main">
 <!-- 	左边 -->
 		<%@ include file="Left.jsp"%>
+		
+		<form method="post">
+				<!-- 		搜索框 -->
+			<div id="InsideBar">
+				<select name="limit" id="insideChild">
+					<option value="null">选择搜索条件</option>
+					<option value="BookISBN">按书籍编号搜索</option>
+					<option value="BookName">按书籍名称搜索</option>
+					<option value="BookType">按书籍类别搜索</option>
+					<option value="BookWriter">按书籍作者搜索</option>
+				</select>
+					
+				<input type="text" name="search">&nbsp;&nbsp;
+				<input type="submit" value="搜索">
+			
+			</div>
+			</form>
+			
 <!-- 	中间的图书列表 -->
 		<div id="bookTable">
+			
 		<%
 		String sql2="select * from BookInfo where 1=1";
 		
@@ -26,7 +45,12 @@
 		if(!("null".equals(""+request.getParameter("limit")))){
 			//如果搜索框无数值
 			if(null==request.getParameter("search")||"".equals(request.getParameter("search").toString())){
-				out.print("请输入搜索关键词");
+// 				out.print("alert('请输入搜索关键词')");
+				%>
+				<script type="text/javascript">
+					alert('请输入搜索关键词');
+				</script>
+				<%
 			}
 			else{
 				String limit=request.getParameter("limit").toString();
@@ -39,24 +63,10 @@
 		%>
 		
 		<form method="post">
-<!-- 		搜索框 -->
-			<div>
-				<select name="limit">
-					<option value="null">选择搜索条件</option>
-					<option value="BookISBN">按书籍编号搜索</option>
-					<option value="BookName">按书籍名称搜索</option>
-					<option value="BookType">按书籍类别搜索</option>
-					<option value="BookWriter">按书籍作者搜索</option>
-				</select>
-					
-				<input type="text" name="search">&nbsp;&nbsp;
-				<input type="submit" value="搜索">
-			
-			</div>
 		
 <!-- 					显示列表 -->
-			<div>
-			<table border="3px" align="center" cellspacing="10px">
+			<div id="top">
+			<table>
 						<tr>
 							<th width="150px">图片</th>
 							<th width="200px">名称</th>
@@ -69,18 +79,31 @@
 							}
 							%>
 						</tr>
+						<tr>
+							<td colspan="4"><hr width="100%" color="black"></td>
+						</tr>
 <!-- 					连接数据库获取数据 ，下面是循环显示-->
 						<%
 							
 							List<Map<String, Object>> rsList=helperClass.SelectSQL(sql2);
 							
 							if(rsList.size()==0){//如果查询不到数据
-								out.println("无结果 或 数据错误！");
+// 								out.println("无结果 或 数据错误！");
+								%>
+								<script type="text/javascript">
+									alert('无结果 或 数据错误！');
+								</script>
+								<%
 							}
 							else{
 								List<Book> bookList=helperClass.reBook(rsList);
 								if(bookList.size()==0){//如果查询不到数据
-									out.println("图书列表转化失败！");
+// 									out.println("图书列表转化失败！");
+									%>
+									<script type="text/javascript">
+										alert('图书列表转化失败！');
+									</script>
+									<%
 								}
 								else{
 									Set<String> ISBNSet=new TreeSet<>();
@@ -99,7 +122,7 @@
 													<%
 												}
 												%></td>
-												<td><%=book.getBookName() %></td>
+												<td align="center"><%=book.getBookName() %></td>
 												<td>作者：<%=book.getBookWriter() %><br>
 													出版社：<%=book.getBookPublisher() %><br>
 													简介：<%=book.getBookIntro() %><br>
@@ -118,14 +141,18 @@
 												<%
 												if(null==session.getAttribute("iden")||!("iden".equals(""+session.getAttribute("iden")))){
 													%>
-													<td>
+													<td align="center">
 														<input type="hidden" name="ID" value="<%=book.getBookISBN() %>">
-														<a href="U_Car.jsp?ID=<%=book.getBookISBN() %>">加入购物车</a><br>
-														<a href="U_Star.jsp?ID=<%=book.getBookISBN() %>">收藏</a>
+														<a href="U_Star.jsp?ID=<%=book.getBookISBN() %>">收藏</a><br><br>
+														<a href="U_Car.jsp?ID=<%=book.getBookISBN() %>">加入购物车</a>
+														
 													</td>
 													<%
 												}
 												%>
+											</tr>
+											<tr>
+												<td colspan="4"><hr width="100%" color="black"></td>
 											</tr>
 										<%
 										}
