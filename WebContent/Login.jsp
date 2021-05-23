@@ -98,21 +98,32 @@
 						}
 						else{
 							for(Map<String, Object> item:rs1){
-								if(UserPwd.equals(""+item.get("UserPwd"))){
-									//登录成功，重定向到主页，记录session信息
-									session.setAttribute("UserName", UserName);
-									session.setAttribute("UserPwd", UserPwd);
-									response.sendRedirect("Index.jsp");
-//	 								out.println("欢迎登录！"+UserName+"！");
-								}
-								else{
+								if("1".equals(""+item.get("UserGrant"))){
 									%>
 									<script type="text/javascript">
-										alert('密码错误，请重新输入密码！');
+										alert('您已被管理员加入网站黑名单！');
 									</script>
 									<%
-// 									out.println("密码错误，请重新输入密码。");
 								}
+								else{
+									if(UserPwd.equals(""+item.get("UserPwd"))){
+										//登录成功，重定向到主页，记录session信息
+										session.setAttribute("UserName", UserName);
+										session.setAttribute("UserPwd", UserPwd);
+										response.sendRedirect("Index.jsp");
+//		 								out.println("欢迎登录！"+UserName+"！");
+									}
+									else{
+										%>
+										<script type="text/javascript">
+											alert('密码错误，请重新输入密码！');
+										</script>
+										<%
+//	 									out.println("密码错误，请重新输入密码。");
+									}
+									
+								}
+								
 							}
 						}
 					}

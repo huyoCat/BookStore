@@ -29,8 +29,8 @@
 			String UserName=session.getAttribute("UserName").toString();
 			
 // 			确定获取的信息不为空
-			if(null!=request.getParameter("phone")&&!("".equals(""+request.getParameter("phone")))
-			&&null!=request.getParameter("address")&&!("".equals(""+request.getParameter("address")))){
+			if(null!=request.getParameter("phone")&&!("null".equals(""+request.getParameter("phone")))&&!("".equals(""+request.getParameter("phone")))
+			&&null!=request.getParameter("address")&&!("null".equals(""+request.getParameter("address")))&&!("".equals(""+request.getParameter("address")))){
 				
 				String Address=""+request.getParameter("address");
 				String Phone=""+request.getParameter("phone");
