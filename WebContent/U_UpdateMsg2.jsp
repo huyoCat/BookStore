@@ -56,7 +56,7 @@
 					List<Map<String, Object>> StarList=helperClass.SelectSQL(compare);
 					if(StarList.size()!=0){
 						if(BePwd.equals(StarList.get(0).get("UserPwd"))){
-							String update="update UserInfo set UserPwd='"+NowPwd+"' UserName='"+UserName+"'";
+							String update="update UserInfo set UserPwd='"+NowPwd+"' where UserName='"+UserName+"'";
 							boolean flag=helperClass.SQL_ZSG(update);
 							if(flag){
 								%>

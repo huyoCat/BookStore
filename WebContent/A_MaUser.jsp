@@ -35,6 +35,7 @@
 				<select name="limit" id="insideChild">
 					<option value="null">选择搜索条件</option>
 					<option value="UserName">根据用户名搜索</option>
+					<option value="UserNow">查看正常用户</option>
 					<option value="UserGrant">查看已拉黑用户</option>
 				</select>
 										
@@ -58,7 +59,7 @@
 				if("iden".equals(session.getAttribute("iden").toString())){
 					String UserName=session.getAttribute("UserName").toString();
 					
-					String SeleSql="select * from UserInfo where UserGrant=0";
+					String SeleSql="select * from UserInfo where 1=1";
 					
 					//如果带着拉黑用户的消息或解除
 					if(null!=request.getParameter("msg")){
@@ -93,6 +94,10 @@
 						if("UserGrant".equals(""+request.getParameter("limit"))){
 							SeleSql="select * from UserInfo where UserGrant=1";
 						}
+						else if("UserNow".equals(""+request.getParameter("limit"))){
+							SeleSql="select * from UserInfo where UserGrant=0";
+						}
+						
 						else if(null==request.getParameter("search")||"".equals(request.getParameter("search").toString())){
 							out.print("请输入搜索关键词");
 						}

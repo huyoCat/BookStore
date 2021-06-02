@@ -49,10 +49,17 @@
 										List<Map<String, Object>> rsType=helperClass.SelectSQL(typeSql);
 										for(Map<String, Object> item:rsType){
 											String TypeName=""+item.get("TypeName");
-											%>
-											<option value="<%=TypeName%>"><%=TypeName%></option>
-											<%
+											if(TypeName.equals(book.getBookType())){
+												%>
+												<option value="<%=TypeName%>" selected><%=TypeName%></option>
+												<%
 											}
+											else{
+												%>
+												<option value="<%=TypeName%>"><%=TypeName%></option>
+												<%
+											}
+										}
 											%>
 								</select><br>
 							³ö°æÉç£º<input type="text" name="BookPublisher" value="<%=book.getBookPublisher() %>">

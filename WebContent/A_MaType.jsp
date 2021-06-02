@@ -78,10 +78,10 @@
 						TypeName=""+List.get(0).get("TypeName");
 					}
 					String sqlTy="select BookType from BookInfo where BookType='"+TypeName+"'";
-					List<Map<String, Object>> StarList=helperClass.SelectSQL(sqlTy);
+					List<Map<String, Object>> StarList=helperClass.Not_Select(sqlTy);
 					if(StarList.size()==0){
 						String dele="delete from BookType where TypeName='"+TypeName+"'";
-						boolean flag=helperClass.SQL_ZSG(dele);
+						boolean flag=helperClass.Not_ZSG(dele);
 						if(flag){
 							out.print("删除成功！");
 						}
@@ -132,7 +132,7 @@
 						<%
 						List<Map<String, Object>> TypeList=helperClass.SelectSQL(sqlAllType);
 						if(TypeList.size()==0){
-							out.print("类别列表为空 或 订单结果集查询失败");
+							out.print("类别列表为空 或 结果集查询失败");
 						}
 						else{
 							for(Map<String, Object> map:TypeList){

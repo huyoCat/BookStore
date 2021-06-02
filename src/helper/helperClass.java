@@ -35,6 +35,86 @@ public class helperClass {
 		return false;
 	}
 	
+	//不用转码的查询
+	public static List<Map<String, Object>> Not_Select(String sql){
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//连接数据库URL
+		//String URL ="jdbc:odbc:Driver=Microsoft Access Driver (*.mdb);DBQ=d:\\LJQ\\SHOP.mdb";
+		String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs=null;
+		try {
+			conn = DriverManager.getConnection( URL,"sa", "1064534251");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs = stmt.executeQuery(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//填充离线结果集
+		ResultSetMetaData rsm = null;
+		try {
+			rsm = rs.getMetaData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		 
+		List<Map<String, Object>> result = new ArrayList<Map<String, Object>>(); 
+		try {
+			while (rs.next()) { 
+			Map<String, Object> map = new TreeMap<String, Object>(); 
+			for (int index = 1; index <= rsm.getColumnCount(); index++) { 
+				map.put(rsm.getColumnName(index), rs.getObject(index)); 
+			} 
+			result.add(map); 
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+//		CachedRowSetImpl crs = new CachedRowSetImpl();
+//        crs.populate(rs);
+		finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 	
 	//连接数据库 查询操作 添加书籍用
 	public static List<Map<String, Object>> SelectSQL(String Bsql) {
@@ -127,6 +207,54 @@ public class helperClass {
 		return result;
 	}
 	
+	//不用转码的增删改
+	public static boolean Not_ZSG(String sql) {
+		boolean flag=false;//成功修改置为true
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//连接数据库URL
+		//String URL ="jdbc:odbc:Driver=Microsoft Access Driver (*.mdb);DBQ=d:\\LJQ\\SHOP.mdb";
+		String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
+//		Connection conn;
+		try {
+			conn = DriverManager.getConnection( URL,"sa", "1064534251");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt.executeUpdate(sql);
+			flag=true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flag;
+	}
 	
 	//数据库 增、删、改
 	public static boolean SQL_ZSG(String Bsql) {
