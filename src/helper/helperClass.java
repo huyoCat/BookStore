@@ -12,9 +12,9 @@ import java.util.regex.Pattern;
 
 
 public class helperClass {
-	//×ªÂëº¯Êı
+	//è½¬ç å‡½æ•°
 	public static String zhuanma(String str) {
-		String result="½âÂë´íÎó";
+		String result="è§£ç é”™è¯¯";
 		try {
 			result = new String(str.getBytes("ISO-8859-1"), "gb2312");
 		} catch (UnsupportedEncodingException e) {
@@ -25,7 +25,7 @@ public class helperClass {
 	}
 		
 	
-	//¼ì²âÊÇ·ñº¬ÖĞÎÄ
+	//æ£€æµ‹æ˜¯å¦å«ä¸­æ–‡
 	public static boolean isContainChinese(String str) {
 		Pattern p = Pattern.compile("[\u4e00-\u9fa5]");
 		Matcher m = p.matcher(str);
@@ -35,7 +35,7 @@ public class helperClass {
 		return false;
 	}
 	
-	//²»ÓÃ×ªÂëµÄ²éÑ¯
+	//ä¸ç”¨è½¬ç çš„æŸ¥è¯¢
 	public static List<Map<String, Object>> Not_Select(String sql){
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -43,14 +43,14 @@ public class helperClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Á¬½ÓÊı¾İ¿âURL
+		//è¿æ¥æ•°æ®åº“URL
 		//String URL ="jdbc:odbc:Driver=Microsoft Access Driver (*.mdb);DBQ=d:\\LJQ\\SHOP.mdb";
-		String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
+		String URL="jdbc:sqlserver://localhost:ä½ çš„ç«¯å£; DatabaseName=ä½ çš„æ•°æ®åº“åç§°";
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
-			conn = DriverManager.getConnection( URL,"sa", "1064534251");
+			conn = DriverManager.getConnection( URL,"ç”¨æˆ·å", "å¯†ç ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,7 +68,7 @@ public class helperClass {
 			e.printStackTrace();
 		}
 		
-		//Ìî³äÀëÏß½á¹û¼¯
+		//å¡«å……ç¦»çº¿ç»“æœé›†
 		ResultSetMetaData rsm = null;
 		try {
 			rsm = rs.getMetaData();
@@ -116,9 +116,9 @@ public class helperClass {
 		return result;
 	}
 	
-	//Á¬½ÓÊı¾İ¿â ²éÑ¯²Ù×÷ Ìí¼ÓÊé¼®ÓÃ
+	//è¿æ¥æ•°æ®åº“ æŸ¥è¯¢æ“ä½œ æ·»åŠ ä¹¦ç±ç”¨
 	public static List<Map<String, Object>> SelectSQL(String Bsql) {
-		// ¼ÓÔØJDBC-ODBCÇÅÇı¶¯Çı¶¯³ÌĞò
+		// åŠ è½½JDBC-ODBCæ¡¥é©±åŠ¨é©±åŠ¨ç¨‹åº
 		//String Driver="sun.jdbc.odbc.JdbcOdbcDriver";
 		String sql="";
 		try {
@@ -134,14 +134,14 @@ public class helperClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Á¬½ÓÊı¾İ¿âURL
+		//è¿æ¥æ•°æ®åº“URL
 		//String URL ="jdbc:odbc:Driver=Microsoft Access Driver (*.mdb);DBQ=d:\\LJQ\\SHOP.mdb";
-		String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
+		String URL="jdbc:sqlserver://localhost:ç«¯å£å·; DatabaseName=æ•°æ®åº“åç§°";
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs=null;
 		try {
-			conn = DriverManager.getConnection( URL,"sa", "1064534251");
+			conn = DriverManager.getConnection( URL,"ç”¨æˆ·å", "å¯†ç ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -159,7 +159,7 @@ public class helperClass {
 			e.printStackTrace();
 		}
 		
-		//Ìî³äÀëÏß½á¹û¼¯
+		//å¡«å……ç¦»çº¿ç»“æœé›†
 		ResultSetMetaData rsm = null;
 		try {
 			rsm = rs.getMetaData();
@@ -207,9 +207,9 @@ public class helperClass {
 		return result;
 	}
 	
-	//²»ÓÃ×ªÂëµÄÔöÉ¾¸Ä
+	//ä¸ç”¨è½¬ç çš„å¢åˆ æ”¹
 	public static boolean Not_ZSG(String sql) {
-		boolean flag=false;//³É¹¦ĞŞ¸ÄÖÃÎªtrue
+		boolean flag=false;//æˆåŠŸä¿®æ”¹ç½®ä¸ºtrue
 		Connection conn = null;
 		Statement stmt = null;
 		try {
@@ -218,12 +218,12 @@ public class helperClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Á¬½ÓÊı¾İ¿âURL
+		//è¿æ¥æ•°æ®åº“URL
 		//String URL ="jdbc:odbc:Driver=Microsoft Access Driver (*.mdb);DBQ=d:\\LJQ\\SHOP.mdb";
-		String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
+		String URL="jdbc:sqlserver://localhost:ç«¯å£; DatabaseName=æ•°æ®åº“å";
 //		Connection conn;
 		try {
-			conn = DriverManager.getConnection( URL,"sa", "1064534251");
+			conn = DriverManager.getConnection( URL,"ç”¨æˆ·å", "å¯†ç ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -256,7 +256,7 @@ public class helperClass {
 		return flag;
 	}
 	
-	//Êı¾İ¿â Ôö¡¢É¾¡¢¸Ä
+	//æ•°æ®åº“ å¢ã€åˆ ã€æ”¹
 	public static boolean SQL_ZSG(String Bsql) {
 		String sql="";
 		try {
@@ -265,7 +265,7 @@ public class helperClass {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		boolean flag=false;//³É¹¦ĞŞ¸ÄÖÃÎªtrue
+		boolean flag=false;//æˆåŠŸä¿®æ”¹ç½®ä¸ºtrue
 		Connection conn = null;
 		Statement stmt = null;
 		try {
@@ -274,12 +274,12 @@ public class helperClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Á¬½ÓÊı¾İ¿âURL
+		//è¿æ¥æ•°æ®åº“URL
 		//String URL ="jdbc:odbc:Driver=Microsoft Access Driver (*.mdb);DBQ=d:\\LJQ\\SHOP.mdb";
-		String URL="jdbc:sqlserver://localhost:1434; DatabaseName=BookStore";
+		String URL="jdbc:sqlserver://localhost:ç«¯å£; DatabaseName=æ•°æ®åº“å";
 //		Connection conn;
 		try {
-			conn = DriverManager.getConnection( URL,"sa", "1064534251");
+			conn = DriverManager.getConnection( URL,"ç”¨æˆ·å", "å¯†ç ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -312,7 +312,7 @@ public class helperClass {
 		return flag;
 	}
 	
-	//ÅĞ¶ÏÊÇ·ñÎªÈÕÆÚ¸ñÊ½
+	//åˆ¤æ–­æ˜¯å¦ä¸ºæ—¥æœŸæ ¼å¼
 	public static boolean isDate(String strDate) {
         Pattern pattern = Pattern
                 .compile("^((\\d{2}(([02468][048])|([13579][26]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))(\\s(((0?[0-9])|([1-2][0-3]))\\:([0-5]?[0-9])((\\s)|(\\:([0-5]?[0-9])))))?$");
@@ -324,11 +324,11 @@ public class helperClass {
         }
     }
 
-	//½á¹û¼¯×ª»¯ÎªbookÀàÓÃ
+	//ç»“æœé›†è½¬åŒ–ä¸ºbookç±»ç”¨
 	public static List<Book> reBook(List<Map<String, Object>> rs){
 		List<Book> BookList=new ArrayList<>();
-		if(null==rs){//Èç¹û²éÑ¯²»µ½Êı¾İ
-			System.out.println("Êı¾İ´íÎó£¡");
+		if(null==rs){//å¦‚æœæŸ¥è¯¢ä¸åˆ°æ•°æ®
+			System.out.println("æ•°æ®é”™è¯¯ï¼");
 		}
 		else {
 			for(Map<String, Object> item:rs){
@@ -355,11 +355,11 @@ public class helperClass {
 	}
 
 	
-	//½á¹û¼¯×ª»¯ÎªOrderÀà
+	//ç»“æœé›†è½¬åŒ–ä¸ºOrderç±»
 	public static List<Order> reOrder(List<Map<String, Object>> rs){
 		List<Order> OrderList=new ArrayList<>();
-		if(null==rs){//Èç¹û²éÑ¯²»µ½Êı¾İ
-			System.out.println("Êı¾İ´íÎó£¡");
+		if(null==rs){//å¦‚æœæŸ¥è¯¢ä¸åˆ°æ•°æ®
+			System.out.println("æ•°æ®é”™è¯¯ï¼");
 		}
 		else {
 			for(Map<String, Object> item:rs){
@@ -379,11 +379,11 @@ public class helperClass {
 		return OrderList;
 	}
 	
-//	×ª»¯ÎªUserÀà
+//	è½¬åŒ–ä¸ºUserç±»
 	public static List<User> reUser(List<Map<String, Object>> rs){
 		List<User> UserList=new ArrayList<>();
-		if(null==rs){//Èç¹û²éÑ¯²»µ½Êı¾İ
-			System.out.println("Êı¾İ´íÎó£¡");
+		if(null==rs){//å¦‚æœæŸ¥è¯¢ä¸åˆ°æ•°æ®
+			System.out.println("æ•°æ®é”™è¯¯ï¼");
 		}
 		else {
 			for(Map<String, Object> item:rs){
@@ -403,7 +403,7 @@ public class helperClass {
 		return UserList;
 	}
 	
-	//»ñÈ¡ÓÃ»§¶©µ¥ÀïµÄÍ¼ÊéÁĞ±í
+	//è·å–ç”¨æˆ·è®¢å•é‡Œçš„å›¾ä¹¦åˆ—è¡¨
 	public static List<String> OrderBook(String BookList) {
 		List<String> result=new ArrayList<>();
 		
@@ -412,20 +412,20 @@ public class helperClass {
 		for(String str:BookArr){
 			String inResult="";
 			String[] inBook=str.split(",");
-//			inlist.add(inBook);//[ISBN,ÊıÁ¿]
+//			inlist.add(inBook);//[ISBN,æ•°é‡]
 			String sql="select * from BookInfo where BookISBN='"+inBook[0]+"'";
 			List<Map<String, Object>> rs=helperClass.SelectSQL(sql);
-			if(rs.size()==0){//Èç¹û²éÑ¯²»µ½Êı¾İ
-				System.out.println("Êı¾İ´íÎó£¡");
+			if(rs.size()==0){//å¦‚æœæŸ¥è¯¢ä¸åˆ°æ•°æ®
+				System.out.println("æ•°æ®é”™è¯¯ï¼");
 			}
 			else{
 				List<Book> bookList=helperClass.reBook(rs);
-				if(bookList.size()==0){//Èç¹û²éÑ¯²»µ½Êı¾İ
-					System.out.println("Êı¾İ´íÎó£¡");
+				if(bookList.size()==0){//å¦‚æœæŸ¥è¯¢ä¸åˆ°æ•°æ®
+					System.out.println("æ•°æ®é”™è¯¯ï¼");
 				}
 				else{
 					Book book=bookList.get(0);
-					inResult="Êé¼®Ãû³Æ£º"+book.getBookName()+"<BR>Êé¼®ISBN:"+book.getBookISBN()+"<BR>¹ºÂòÊıÁ¿£º"+inBook[1];
+					inResult="ä¹¦ç±åç§°ï¼š"+book.getBookName()+"<BR>ä¹¦ç±ISBN:"+book.getBookISBN()+"<BR>è´­ä¹°æ•°é‡ï¼š"+inBook[1];
 					result.add(inResult);
 				}
 			}
@@ -434,7 +434,7 @@ public class helperClass {
 	}
 	
 	
-	//ÓÃ»§ĞŞ¸Ä¶©µ¥ĞÅÏ¢ÓÃµ½µÄÊı¾İ
+	//ç”¨æˆ·ä¿®æ”¹è®¢å•ä¿¡æ¯ç”¨åˆ°çš„æ•°æ®
 	public static List<Book_Number> updateOrder(String BookList){
 		List<Book_Number> result=new ArrayList<>();
 //		Map<Book,Integer> map=new TreeMap<>();
@@ -446,20 +446,20 @@ public class helperClass {
 			Book_Number inList=new Book_Number();
 			String[] inBook=str.split(",");
 			
-//			inlist.add(inBook);//[ISBN,ÊıÁ¿]
+//			inlist.add(inBook);//[ISBN,æ•°é‡]
 			String sql="select * from BookInfo where BookISBN='"+inBook[0]+"'";
 			List<Map<String, Object>> rs=helperClass.SelectSQL(sql);
-			if(rs.size()==0){//Èç¹û²éÑ¯²»µ½Êı¾İ
-				System.out.println("Êı¾İ´íÎó£¡");
+			if(rs.size()==0){//å¦‚æœæŸ¥è¯¢ä¸åˆ°æ•°æ®
+				System.out.println("æ•°æ®é”™è¯¯ï¼");
 			}
 			else{
 				List<Book> bookList=helperClass.reBook(rs);
-				if(bookList.size()==0){//Èç¹û²éÑ¯²»µ½Êı¾İ
-					System.out.println("Êı¾İ´íÎó£¡");
+				if(bookList.size()==0){//å¦‚æœæŸ¥è¯¢ä¸åˆ°æ•°æ®
+					System.out.println("æ•°æ®é”™è¯¯ï¼");
 				}
 				else{
 					Book book=bookList.get(0);
-//					inResult="Êé¼®Ãû³Æ£º"+book.getBookName()+"<BR>Êé¼®ISBN:"+book.getBookISBN()+"<BR>¹ºÂòÊıÁ¿£º"+inBook[1];
+//					inResult="ä¹¦ç±åç§°ï¼š"+book.getBookName()+"<BR>ä¹¦ç±ISBN:"+book.getBookISBN()+"<BR>è´­ä¹°æ•°é‡ï¼š"+inBook[1];
 					inList.setBook(book);
 					inList.setNumber(Integer.parseInt(inBook[1]));
 					result.add(inList);
@@ -470,7 +470,7 @@ public class helperClass {
 		return result;
 	}
 	
-//	»ñÈ¡½ñÌìµÄÈÕÆÚ
+//	è·å–ä»Šå¤©çš„æ—¥æœŸ
 	public static String getDate() {
 		Date date = new Date(System.currentTimeMillis()); 
 
@@ -480,7 +480,7 @@ public class helperClass {
 	}
 	
 	
-	//Ìí¼Ó»òĞŞ¸ÄÊé¼®Àà±ğÊ±¼ì²âÊÇ·ñÖØÃû
+	//æ·»åŠ æˆ–ä¿®æ”¹ä¹¦ç±ç±»åˆ«æ—¶æ£€æµ‹æ˜¯å¦é‡å
 	public static boolean IsReName(String sql) {
 		List<Map<String, Object>> StarList=helperClass.SelectSQL(sql);
 		if(StarList.size()==0) {
